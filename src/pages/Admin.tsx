@@ -6,6 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { LogOut, Users, MessageSquare, Calendar, FileText, Briefcase, Star } from 'lucide-react';
+import TeamManagement from '@/components/admin/TeamManagement';
+import CaseStudyManagement from '@/components/admin/CaseStudyManagement';
+import JobManagement from '@/components/admin/JobManagement';
+import TestimonialManagement from '@/components/admin/TestimonialManagement';
 
 const Admin = () => {
   const [user, setUser] = useState(null);
@@ -147,19 +151,48 @@ const Admin = () => {
                 <CardDescription>Common administrative tasks</CardDescription>
               </CardHeader>
               <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Button variant="outline" className="h-auto p-4 flex flex-col items-center space-y-2">
+                <Button 
+                  variant="outline" 
+                  className="h-auto p-4 flex flex-col items-center space-y-2"
+                  onClick={() => {
+                    const tabsList = document.querySelector('[data-state="active"]');
+                    const teamTab = document.querySelector('[value="team"]') as HTMLElement;
+                    teamTab?.click();
+                  }}
+                >
                   <Users className="h-6 w-6" />
                   <span className="text-sm">Manage Team</span>
                 </Button>
-                <Button variant="outline" className="h-auto p-4 flex flex-col items-center space-y-2">
+                <Button 
+                  variant="outline" 
+                  className="h-auto p-4 flex flex-col items-center space-y-2"
+                  onClick={() => {
+                    const caseStudiesTab = document.querySelector('[value="case-studies"]') as HTMLElement;
+                    caseStudiesTab?.click();
+                  }}
+                >
                   <FileText className="h-6 w-6" />
                   <span className="text-sm">Add Case Study</span>
                 </Button>
-                <Button variant="outline" className="h-auto p-4 flex flex-col items-center space-y-2">
+                <Button 
+                  variant="outline" 
+                  className="h-auto p-4 flex flex-col items-center space-y-2"
+                  onClick={() => {
+                    const careersTab = document.querySelector('[value="careers"]') as HTMLElement;
+                    careersTab?.click();
+                  }}
+                >
                   <Briefcase className="h-6 w-6" />
                   <span className="text-sm">Post Job</span>
                 </Button>
-                <Button variant="outline" className="h-auto p-4 flex flex-col items-center space-y-2">
+                <Button 
+                  variant="outline" 
+                  className="h-auto p-4 flex flex-col items-center space-y-2"
+                  onClick={() => {
+                    const contentTab = document.querySelector('[value="content"]') as HTMLElement;
+                    contentTab?.click();
+                  }}
+                >
                   <Star className="h-6 w-6" />
                   <span className="text-sm">Add Testimonial</span>
                 </Button>
@@ -192,51 +225,19 @@ const Admin = () => {
           </TabsContent>
 
           <TabsContent value="case-studies">
-            <Card>
-              <CardHeader>
-                <CardTitle>Case Studies</CardTitle>
-                <CardDescription>Manage case studies and success stories</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Case study management interface will be implemented here.</p>
-              </CardContent>
-            </Card>
+            <CaseStudyManagement />
           </TabsContent>
 
           <TabsContent value="team">
-            <Card>
-              <CardHeader>
-                <CardTitle>Team Members</CardTitle>
-                <CardDescription>Manage team member profiles</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Team management interface will be implemented here.</p>
-              </CardContent>
-            </Card>
+            <TeamManagement />
           </TabsContent>
 
           <TabsContent value="content">
-            <Card>
-              <CardHeader>
-                <CardTitle>Content Management</CardTitle>
-                <CardDescription>Manage blog posts, news, and testimonials</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Content management interface will be implemented here.</p>
-              </CardContent>
-            </Card>
+            <TestimonialManagement />
           </TabsContent>
 
           <TabsContent value="careers">
-            <Card>
-              <CardHeader>
-                <CardTitle>Job Openings</CardTitle>
-                <CardDescription>Manage career opportunities</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Job management interface will be implemented here.</p>
-              </CardContent>
-            </Card>
+            <JobManagement />
           </TabsContent>
         </Tabs>
       </main>
