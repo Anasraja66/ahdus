@@ -10,6 +10,8 @@ import TeamManagement from '@/components/admin/TeamManagement';
 import CaseStudyManagement from '@/components/admin/CaseStudyManagement';
 import JobManagement from '@/components/admin/JobManagement';
 import TestimonialManagement from '@/components/admin/TestimonialManagement';
+import AppointmentManagement from '@/components/admin/AppointmentManagement';
+import ContactManagement from '@/components/admin/ContactManagement';
 
 const Admin = () => {
   const [user, setUser] = useState(null);
@@ -201,27 +203,11 @@ const Admin = () => {
           </TabsContent>
 
           <TabsContent value="contacts">
-            <Card>
-              <CardHeader>
-                <CardTitle>Contact Submissions</CardTitle>
-                <CardDescription>View and manage contact form submissions</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Contact management interface will be implemented here.</p>
-              </CardContent>
-            </Card>
+            <ContactManagement />
           </TabsContent>
 
           <TabsContent value="appointments">
-            <Card>
-              <CardHeader>
-                <CardTitle>Appointments</CardTitle>
-                <CardDescription>View and manage appointment bookings</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Appointment management interface will be implemented here.</p>
-              </CardContent>
-            </Card>
+            <AppointmentManagement />
           </TabsContent>
 
           <TabsContent value="case-studies">

@@ -198,13 +198,20 @@ const JobManagement = () => {
               </div>
               <div>
                 <Label htmlFor="employment_type">Employment Type *</Label>
-                <Input
+                <select
                   id="employment_type"
                   value={formData.employment_type}
                   onChange={(e) => setFormData({ ...formData, employment_type: e.target.value })}
-                  placeholder="Full-time, Part-time, Contract"
                   required
-                />
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <option value="">Select employment type</option>
+                  <option value="full-time">Full-time</option>
+                  <option value="part-time">Part-time</option>
+                  <option value="contract">Contract</option>
+                  <option value="freelance">Freelance</option>
+                  <option value="internship">Internship</option>
+                </select>
               </div>
             </div>
 

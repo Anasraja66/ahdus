@@ -1,70 +1,50 @@
 import { Linkedin, Github, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect } from "react"; // Import useEffect
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS CSS
+import { useEffect, useState } from "react";
+import { supabase } from '@/integrations/supabase/client';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-const teamMembers = [
-  {
-    name: "Dr. Sarah Chen",
-    role: "Chief Technology Officer",
-    expertise: "AI Research & Computer Vision",
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b2e5?w=400&h=400&fit=crop&crop=face",
-    bio: "15+ years in AI research with PhD from MIT. Led breakthrough projects in autonomous systems.",
-    social: {
-      linkedin: "#",
-      github: "#",
-      email: "sarah.chen@ahdustech.com"
-    }
-  },
-  {
-    name: "Michael Rodriguez",
-    role: "Head of Engineering",
-    expertise: "Cloud Infrastructure & DevOps",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    bio: "Former AWS Solutions Architect with expertise in large-scale cloud deployments.",
-    social: {
-      linkedin: "#",
-      github: "#",
-      email: "michael.rodriguez@ahdustech.com"
-    }
-  },
-  {
-    name: "Dr. Priya Patel",
-    role: "AI Research Director",
-    expertise: "Machine Learning & Neural Networks",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
-    bio: "Published researcher in deep learning with 50+ peer-reviewed papers in top-tier journals.",
-    social: {
-      linkedin: "#",
-      github: "#",
-      email: "priya.patel@ahdustech.com"
-    }
-  },
-  {
-    name: "James Wilson",
-    role: "IoT Solutions Lead",
-    expertise: "Industrial IoT & Edge Computing",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-    bio: "Industrial automation expert with 12+ years implementing IoT solutions in manufacturing.",
-    social: {
-      linkedin: "#",
-      github: "#",
-      email: "james.wilson@ahdustech.com"
-    }
-  },
-];
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  expertise: string[];
+  bio: string;
+  image: string;
+  linkedin_url?: string;
+  github_url?: string;
+  email?: string;
+  active: boolean;
+}
 
 const TeamSection = () => {
-  // Initialize AOS when the component mounts
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     AOS.init({
-      duration: 800, // global duration for animations
-      once: true, // animation happens only once
-      easing: 'ease-out-cubic', // animation easing
+      duration: 800,
+      once: true,
+      easing: 'ease-out-cubic',
     });
-    AOS.refresh(); // refresh AOS to re-calculate element positions
+    AOS.refresh();
+    
+    fetchTeamMembers();
   }, []);
+
+  const fetchTeamMembers = async () => {
+    const { data, error } = await supabase
+      .from('team_members')
+      .select('*')
+      .eq('active', true)
+      .order('display_order', { ascending: true });
+
+    if (!error && data) {
+      setTeamMembers(data);
+    }
+    setLoading(false);
+  };
 
   return (
     <section id="team" className="py-24 bg-gradient-dark">
@@ -81,8 +61,14 @@ const TeamSection = () => {
         </div>
 
         {/* Team Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {teamMembers.map((member, index) => (
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-2 text-white/60">Loading team...</p>
+          </div>
+        ) : teamMembers.length > 0 ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            {teamMembers.map((member, index) => (
             <div
               key={member.name}
               className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 hover:shadow-glow hover:scale-105"
@@ -116,7 +102,7 @@ const TeamSection = () => {
                 </p>
 
                 <p className="text-accent text-xs mb-4">
-                  {member.expertise}
+                  {member.expertise?.join(', ') || 'Expert'}
                 </p>
 
                 <p className="text-white/60 text-sm leading-relaxed mb-6">
@@ -125,29 +111,40 @@ const TeamSection = () => {
 
                 {/* Social Links */}
                 <div className="flex justify-center space-x-3">
-                  <a
-                    href={member.social.linkedin}
-                    className="p-2 bg-white/10 rounded-lg hover:bg-primary/20 transition-colors group"
-                  >
-                    <Linkedin className="w-4 h-4 text-white/60 group-hover:text-primary transition-colors" />
-                  </a>
-                  <a
-                    href={member.social.github}
-                    className="p-2 bg-white/10 rounded-lg hover:bg-accent/20 transition-colors group"
-                  >
-                    <Github className="w-4 h-4 text-white/60 group-hover:text-accent transition-colors" />
-                  </a>
-                  <a
-                    href={`mailto:${member.social.email}`}
-                    className="p-2 bg-white/10 rounded-lg hover:bg-primary-glow/20 transition-colors group"
-                  >
-                    <Mail className="w-4 h-4 text-white/60 group-hover:text-primary-glow transition-colors" />
-                  </a>
+                  {member.linkedin_url && (
+                    <a
+                      href={member.linkedin_url}
+                      className="p-2 bg-white/10 rounded-lg hover:bg-primary/20 transition-colors group"
+                    >
+                      <Linkedin className="w-4 h-4 text-white/60 group-hover:text-primary transition-colors" />
+                    </a>
+                  )}
+                  {member.github_url && (
+                    <a
+                      href={member.github_url}
+                      className="p-2 bg-white/10 rounded-lg hover:bg-accent/20 transition-colors group"
+                    >
+                      <Github className="w-4 h-4 text-white/60 group-hover:text-accent transition-colors" />
+                    </a>
+                  )}
+                  {member.email && (
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="p-2 bg-white/10 rounded-lg hover:bg-primary-glow/20 transition-colors group"
+                    >
+                      <Mail className="w-4 h-4 text-white/60 group-hover:text-primary-glow transition-colors" />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-white/60">No team members found.</p>
+          </div>
+        )}
 
       </div>
     </section>
