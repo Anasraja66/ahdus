@@ -14,9 +14,9 @@ import CaseStudies from "./pages/CaseStudies";
 import Blog from "./pages/Blog";
 import Industries from "./pages/Industries";
 import NotFound from "./pages/NotFound";
-import Pricing from "./pages/Pricing";
-import Careers from "./pages/Carriers";
-import Newsroom from "./pages/Newsroom";
+import Pricing from "./pages/pricing";
+import Careers from "./pages/carriers";
+import Newsroom from "./pages/newsroom";
 
 const queryClient = new QueryClient();
 
