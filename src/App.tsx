@@ -17,6 +17,8 @@ import NotFound from "./pages/NotFound";
 import Pricing from "./pages/pricing";
 import Careers from "./pages/carriers";
 import Newsroom from "./pages/newsroom";
+import Auth from "./pages/Auth";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +43,8 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="/careers" element={<Careers />} />
           <Route path="/newsroom" element={<Newsroom />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
