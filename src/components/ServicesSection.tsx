@@ -333,7 +333,10 @@ const ServicesSection: React.FC = () => {
         .service-title-medium,
         .service-title-small,
         .service-title-additional {
-          color: hsl(var(--foreground));
+          background: linear-gradient(135deg, hsl(217 91% 60%), hsl(270 91% 65%));
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
           font-weight: 700;
         }
 
