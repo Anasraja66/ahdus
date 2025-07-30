@@ -66,7 +66,7 @@ const ServicesSection: React.FC = () => {
       <div className="container mx-auto px-6 py-16 pt-16 relative z-10" data-aos="fade-up" data-aos-delay="100">
         {/* Hero Section */}
         <div className="text-center mb-16" data-aos="fade-down" data-aos-delay="200">
-          <h1 className="text-5xl md:text-6xl font-bold gradient-text mb-6" data-aos="zoom-in" data-aos-delay="300" style={{ background: 'linear-gradient(135deg, hsl(217 91% 60%), hsl(270 91% 65%))' }}>
+          <h1 className="text-5xl md:text-6xl font-bold gradient-text mb-6" data-aos="zoom-in" data-aos-delay="300">
             What We Do Best
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="400">
@@ -87,7 +87,7 @@ const ServicesSection: React.FC = () => {
             >
               <div className="service-card-inner h-full">
                 <div className="p-6 h-full flex flex-col" data-aos="fade-in" data-aos-delay="800">
-                  <h3 className="service-title-large text-3xl md:text-4xl mb-4 font-extrabold" data-aos="slide-down" data-aos-delay="900" style={{ background: 'linear-gradient(135deg, hsl(217 91% 60%), hsl(270 91% 65%))' }}>
+                  <h3 className="service-title-large text-3xl md:text-4xl mb-4 font-extrabold" data-aos="slide-down" data-aos-delay="900" >
                     {services[0].title}
                   </h3>
                   <div className="flex-1 flex items-center justify-center mb-4 adaptive-image-container" data-aos="zoom-in" data-aos-delay="1000">
