@@ -93,7 +93,7 @@ const Navigation = () => {
           {/* Custom Software - using a div to simulate dropdown trigger */}
           <div className="relative group">
             <button className="flex items-center text-white hover:text-gray-300 transition-colors transition-transform duration-200 ease-out hover:scale-105 text-sm font-medium focus:outline-none">
-              Custom Software <ChevronDown className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" />
+              Solutions <ChevronDown className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" />
             </button>
             {/* Dropdown Content - styled simply for the design */}
             <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-48 rounded-md shadow-lg bg-[#333333] ring-1 ring-black ring-opacity-5 hidden group-hover:block transition-all duration-200 ease-out origin-top">
@@ -107,16 +107,16 @@ const Navigation = () => {
 
           {/* Other Links */}
           <a href="/team-augmentation" className="text-white hover:text-gray-300 transition-colors transition-transform duration-200 ease-out hover:scale-105 text-sm font-medium">
-            Team Augmentation
+            Team
           </a>
           <a href="/about-us" className="text-white hover:text-gray-300 transition-colors transition-transform duration-200 ease-out hover:scale-105 text-sm font-medium">
-            About Us
+            About
           </a>
           <a href="/industries" className="text-white hover:text-gray-300 transition-colors transition-transform duration-200 ease-out hover:scale-105 text-sm font-medium">
             Industries
           </a>
           <a href="/case-studies" className="text-white hover:text-gray-300 transition-colors transition-transform duration-200 ease-out hover:scale-105 text-sm font-medium">
-            Case Studies
+            Success 
           </a>
         </div>
 
