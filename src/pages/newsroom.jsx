@@ -1,0 +1,293 @@
+import { useState, useEffect } from "react";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Calendar, ArrowRight, Newspaper, X } from "lucide-react"; // Added X for close button
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+// Mock data for news articles
+const newsArticles = [
+  {
+    id: 1,
+    title: "AHDUS Technology Launches New AI-Powered Analytics Platform",
+    date: "2024-07-25",
+    excerpt: "Our latest platform revolutionizes data analysis with advanced AI algorithms, providing deeper insights and actionable intelligence for businesses.",
+    fullContent: "In a significant leap forward for enterprise data solutions, AHDUS Technology today announced the official launch of its groundbreaking AI-Powered Analytics Platform. This innovative platform integrates state-of-the-art machine learning algorithms to process vast datasets, uncovering hidden patterns and delivering predictive insights that were previously unattainable. 'We believe this platform will empower businesses to make faster, more informed decisions, transforming raw data into a strategic asset,' said [CEO Name], CEO of AHDUS Technology. The platform features intuitive dashboards, real-time reporting, and customizable AI models tailored to specific industry needs. Early adopters have reported significant improvements in operational efficiency and market responsiveness.",
+    image: "https://placehold.co/800x400/3B82F6/FFFFFF?text=AI+Platform"
+  },
+  {
+    id: 2,
+    title: "Partnership with Global Robotics Leader Announced",
+    date: "2024-07-20",
+    excerpt: "AHDUS Technology is proud to announce a strategic partnership aimed at integrating our AI solutions into next-generation robotics for industrial automation.",
+    fullContent: "AHDUS Technology and [Robotics Company Name], a global leader in industrial robotics, have officially signed a strategic partnership agreement. This collaboration will focus on embedding AHDUS's advanced AI and machine learning capabilities directly into [Robotics Company Name]'s robotic systems. The goal is to create more intelligent, autonomous, and efficient robotic solutions for manufacturing, logistics, and other heavy industries. 'This partnership represents a synergy of cutting-edge AI and robust hardware, promising a new era of automation,' stated [CTO Name], CTO of AHDUS Technology. The initial phase of the partnership will involve pilot projects in smart factories across Europe and Asia.",
+    image: "https://placehold.co/800x400/8B5CF6/FFFFFF?text=Robotics+Partnersh\nip"
+  },
+  {
+    id: 3,
+    title: "Innovating Sustainable AI: Our Commitment to Green Tech",
+    date: "2024-07-15",
+    excerpt: "Discover how AHDUS Technology is committed to developing environmentally friendly AI solutions, minimizing carbon footprint in our development processes.",
+    fullContent: "As part of our ongoing commitment to corporate social responsibility, AHDUS Technology is proud to unveil its 'Sustainable AI Initiative.' This program focuses on researching and implementing methods to reduce the energy consumption and carbon footprint associated with AI model training and deployment. 'Green technology isn't just a buzzword for us; it's a core principle guiding our innovation,' says [Head of R&D Name], Head of Research and Development. Efforts include optimizing algorithms for efficiency, utilizing renewable energy sources for data centers, and promoting sustainable practices throughout our supply chain. We believe that powerful AI can also be responsible AI.",
+    image: "https://placehold.co/800x400/10B981/FFFFFF?text=Green+AI"
+  },
+  {
+    id: 4,
+    title: "AHDUS Experts Share Insights at Tech Summit 2024",
+    date: "2024-07-10",
+    excerpt: "Our team members presented on the future of quantum computing and ethical AI at the prestigious International Tech Summit, receiving widespread acclaim.",
+    fullContent: "Leading experts from AHDUS Technology recently took center stage at the International Tech Summit 2024, a premier global event for technological innovation. Dr. [Expert Name], our Head of AI Ethics, delivered a compelling keynote on 'The Imperative of Ethical AI in a Connected World,' emphasizing the need for responsible AI development. Concurrently, [Another Expert Name], our Lead Quantum Researcher, presented groundbreaking findings on 'Accelerating Computation with Quantum Algorithms.' Both presentations were met with enthusiastic reception, sparking lively discussions and reinforcing AHDUS Technology's position at the forefront of technological thought leadership.",
+    image: "https://placehold.co/800x400/EC4899/FFFFFF?text=Tech+Summit"
+  },
+  {
+    id: 5,
+    title: "Expanding Our Global Footprint: New Office in Singapore",
+    date: "2024-07-01",
+    excerpt: "To better serve our growing client base in Asia-Pacific, AHDUS Technology proudly announces the opening of our new regional office in Singapore.",
+    fullContent: "AHDUS Technology is excited to announce the expansion of its global operations with the opening of a new regional office in Singapore. This strategic move strengthens our presence in the Asia-Pacific market and allows us to provide more localized support and services to our rapidly expanding client base in the region. 'Singapore's vibrant tech ecosystem and strategic location make it an ideal hub for our continued growth,' commented [VP of Sales Name], VP of Global Sales. The new office will house sales, support, and a dedicated R&D team focused on regional market needs.",
+    image: "https://placehold.co/800x400/6366F1/FFFFFF?text=Singapore+Office"
+  },
+];
+
+const Newsroom = () => {
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-out-cubic',
+    });
+    AOS.refresh();
+
+    // Disable scroll when modal is open
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+
+  const openModal = (article) => {
+    setSelectedArticle(article);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedArticle(null);
+  };
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="pt-32 pb-24 bg-gradient-to-br from-muted/20 via-background to-muted/10 relative overflow-hidden">
+        {/* Subtle animated grid background */}
+        <div 
+          className="absolute inset-0 z-0" 
+          style={{
+            backgroundImage: `
+              repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 30px),
+              repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 30px)
+            `,
+            backgroundSize: '30px 30px',
+            animation: 'fade-in-out-grid 10s infinite alternate'
+          }}
+        />
+        {/* Decorative background elements for visual interest (existing blobs) */}
+        <div 
+          className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" 
+          data-aos="fade" data-aos-offset="0" data-aos-duration="2000" data-aos-easing="ease-in-out-back"
+        />
+        <div 
+          className="absolute top-1/2 right-1/3 w-48 h-48 bg-accent/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" 
+          data-aos="fade" data-aos-offset="0" data-aos-duration="2000" data-aos-easing="ease-in-out-back"
+        />
+        <div 
+          className="absolute bottom-1/4 left-1/3 w-40 h-40 bg-primary-glow/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" 
+          data-aos="fade" data-aos-offset="0" data-aos-duration="2000" data-aos-easing="ease-in-out-back"
+        />
+        {/* Original "cool effect" divs - these are already good */}
+        <div className="absolute inset-0 z-0 opacity-20">
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-purple-500/0 to-transparent animate-pulse-slow" />
+            <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-sky-500/0 to-transparent animate-pulse-slow animation-delay-3000" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-pink-500/10 via-fuchsia-500/0 to-transparent animate-spin-slow" />
+        </div>
+
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h1 className="text-4xl md:text-6xl font-display font-bold mb-6" data-aos="fade-up" data-aos-delay="100">
+            AHDUS <span className="gradient-text">Newsroom</span>
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="300">
+            Stay updated with our latest announcements, insights, and breakthroughs in technology.
+          </p>
+        </div>
+      </section>
+
+      {/* News Articles Section */}
+      <section className="py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-5xl font-display font-bold text-center mb-16" data-aos="fade-up">
+            Latest <span className="gradient-text">Updates</span>
+          </h2>
+
+          {newsArticles.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {newsArticles.map((article, index) => (
+                <Card 
+                  key={article.id} 
+                  className="p-6 bg-gradient-to-br from-card via-card to-muted/5 border border-border/50 shadow-lg rounded-xl flex flex-col transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:border-primary group relative overflow-hidden"
+                  data-aos="fade-up" // Staggered fade-up animation
+                  data-aos-delay={index * 100}
+                >
+                  {/* Subtle background glow on hover */}
+                  <div className="absolute inset-0 bg-gradient-glow opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+                  
+                  {/* Article Image */}
+                  <div className="relative h-48 w-full mb-4 rounded-lg overflow-hidden">
+                    <img 
+                      src={article.image} 
+                      alt={article.title} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/800x400/CCCCCC/333333?text=News+Image`; }} // Fallback image
+                    />
+                  </div>
+
+                  <div className="flex items-center text-sm text-muted-foreground mb-3 relative z-10">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </div>
+                  
+                  <h3 className="text-xl font-display font-bold mb-3 gradient-text group-hover:text-primary-glow transition-colors duration-300 relative z-10 line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-6 flex-grow relative z-10 line-clamp-3">
+                    {article.excerpt}
+                  </p>
+
+                  <Button 
+                    variant="outline" 
+                    className="w-full hover:bg-primary hover:text-white transition-all duration-300 relative z-10"
+                    size="sm"
+                    onClick={() => openModal(article)}
+                  >
+                    Read More
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16" data-aos="fade-up">
+              <div className="w-16 h-16 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Newspaper className="w-8 h-8 text-muted-foreground" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-4">No news available at the moment.</h3>
+              <p className="text-muted-foreground mb-6">
+                Check back soon for exciting updates from AHDUS Technology!
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <Footer />
+
+      {/* Article Modal */}
+      {isModalOpen && selectedArticle && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50"
+          onClick={closeModal} // Close modal when clicking outside
+        >
+          <div 
+            className="bg-card rounded-xl p-4 sm:p-6 md:p-8 max-w-3xl w-full max-h-[10vh] overflow-y-auto relative shadow-2xl transform scale-95 opacity-0 animate-modal-open" // Adjusted padding for responsiveness
+            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
+          >
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+              onClick={closeModal}
+            >
+              <X className="w-6 h-6" />
+            </Button>
+            <h2 className="text-3xl font-display font-bold mb-4 gradient-text">
+              {selectedArticle.title}
+            </h2>
+            <div className="flex items-center text-sm text-muted-foreground mb-6">
+              <Calendar className="w-4 h-4 mr-2" />
+              {new Date(selectedArticle.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </div>
+            {selectedArticle.image && (
+              <div className="mb-6 rounded-lg overflow-hidden">
+                <img 
+                  src={selectedArticle.image} 
+                  alt={selectedArticle.title} 
+                  className="w-full h-auto object-cover" 
+                  onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/800x400/CCCCCC/333333?text=News+Image`; }} // Fallback image
+                />
+              </div>
+            )}
+            <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+              {selectedArticle.fullContent}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Custom CSS for modal animation and new background animations */}
+      <style jsx>{`
+        @keyframes modalOpen {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        .animate-modal-open {
+          animation: modalOpen 0.3s ease-out forwards;
+        }
+
+        @keyframes pulse-slow {
+          0% { opacity: 0.2; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.05); }
+          100% { opacity: 0.2; transform: scale(1); }
+        }
+
+        @keyframes spin-slow {
+          0% { transform: translate(-50%, -50%) rotate(0deg); }
+          100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .animate-pulse-slow {
+          animation: pulse-slow 6s infinite ease-in-out;
+        }
+
+        .animate-spin-slow {
+          animation: spin-slow 15s linear infinite;
+        }
+
+        @keyframes fade-in-out-grid {
+          0% { opacity: 0.05; }
+          100% { opacity: 0.15; }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+
+
+export default Newsroom;
