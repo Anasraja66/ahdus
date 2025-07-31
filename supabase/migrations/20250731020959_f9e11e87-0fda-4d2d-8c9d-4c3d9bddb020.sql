@@ -1,0 +1,39 @@
+-- Insert test team members
+INSERT INTO public.team_members (name, role, email, bio, expertise, display_order, active) VALUES
+('Sarah Johnson', 'Senior Developer', 'sarah@company.com', 'Full-stack developer with 8+ years experience in React and Node.js. Passionate about creating scalable web applications.', ARRAY['React', 'Node.js', 'TypeScript', 'AWS'], 1, true),
+('Michael Chen', 'UI/UX Designer', 'michael@company.com', 'Creative designer focused on user-centered design and modern interfaces. Expert in Figma and design systems.', ARRAY['UI Design', 'UX Research', 'Figma', 'Prototyping'], 2, true),
+('David Rodriguez', 'DevOps Engineer', 'david@company.com', 'Infrastructure specialist with expertise in cloud platforms and automation. Ensures reliable and scalable deployments.', ARRAY['AWS', 'Docker', 'Kubernetes', 'CI/CD'], 3, true),
+('Emily Zhang', 'Product Manager', 'emily@company.com', 'Strategic product leader with experience in agile methodologies and cross-functional team management.', ARRAY['Product Strategy', 'Agile', 'Analytics', 'Roadmapping'], 4, true);
+
+-- Insert test case studies
+INSERT INTO public.case_studies (title, category, industry, summary, impact, content, tags, display_order, featured) VALUES
+('E-commerce Platform Redesign', 'Web Development', 'Retail', 'Complete redesign of a major e-commerce platform resulting in 40% increase in conversions', 'Increased conversion rate by 40%, reduced bounce rate by 25%, improved mobile experience', 'We worked with a leading retail company to completely redesign their e-commerce platform. The project involved user research, UI/UX design, and full-stack development using React and Node.js.', ARRAY['React', 'E-commerce', 'UI/UX', 'Performance'], 1, true),
+('Healthcare Management System', 'Custom Software', 'Healthcare', 'Built a comprehensive patient management system for a hospital network', 'Reduced administrative time by 60%, improved patient satisfaction scores by 35%', 'Developed a secure, HIPAA-compliant patient management system that streamlined operations across multiple hospital locations.', ARRAY['Healthcare', 'Security', 'Database', 'Integration'], 2, true),
+('Mobile Banking App', 'Mobile Development', 'Financial Services', 'Cross-platform mobile banking application with advanced security features', 'Acquired 50,000+ users in first 6 months, 4.8-star app store rating', 'Created a feature-rich mobile banking app with biometric authentication, real-time notifications, and seamless user experience.', ARRAY['Mobile', 'Security', 'Fintech', 'React Native'], 3, false);
+
+-- Insert test job openings
+INSERT INTO public.job_openings (title, department, location, employment_type, description, requirements, benefits, salary_range, active, display_order) VALUES
+('Senior React Developer', 'Engineering', 'Remote', 'full-time', 'We are looking for an experienced React developer to join our growing team. You will be responsible for building scalable web applications and mentoring junior developers.', ARRAY['5+ years of React experience', 'Strong TypeScript skills', 'Experience with modern build tools', 'Knowledge of testing frameworks'], ARRAY['Competitive salary', 'Health insurance', 'Remote work flexibility', '401k matching'], '$90,000 - $120,000', true, 1),
+('Product Designer', 'Design', 'San Francisco, CA', 'full-time', 'Join our design team to create beautiful and functional user experiences. You will work closely with product managers and engineers to bring ideas to life.', ARRAY['3+ years of product design experience', 'Proficiency in Figma', 'User research experience', 'Portfolio of web/mobile projects'], ARRAY['Health insurance', 'Dental coverage', 'Flexible PTO', 'Design conference budget'], '$80,000 - $100,000', true, 2),
+('DevOps Engineer', 'Engineering', 'Austin, TX', 'full-time', 'Help us build and maintain our cloud infrastructure. You will work on automating deployments, monitoring systems, and ensuring high availability.', ARRAY['Experience with AWS/Azure', 'Docker and Kubernetes knowledge', 'CI/CD pipeline experience', 'Scripting skills (Python/Bash)'], ARRAY['Stock options', 'Health insurance', 'Professional development budget', 'Gym membership'], '$85,000 - $110,000', true, 3);
+
+-- Insert test testimonials
+INSERT INTO public.testimonials (client_name, company, position, content, rating, impact, featured, active, display_order) VALUES
+('Jennifer Williams', 'TechCorp Solutions', 'CTO', 'The team delivered an exceptional product that exceeded our expectations. Their technical expertise and attention to detail were outstanding throughout the entire project.', 5, 'Improved system performance by 300% and reduced maintenance costs significantly', true, true, 1),
+('Robert Anderson', 'StartupXYZ', 'CEO', 'Working with this team was a game-changer for our startup. They helped us build a scalable platform that grew with our business needs.', 5, 'Successfully scaled from 1,000 to 100,000 users without any major issues', true, true, 2),
+('Lisa Chen', 'Global Enterprises', 'VP of Technology', 'Professional, reliable, and incredibly skilled. They transformed our legacy system into a modern, efficient platform.', 5, 'Reduced operational costs by 40% and improved user satisfaction scores', false, true, 3),
+('Mark Thompson', 'InnovaCorp', 'Product Manager', 'The attention to user experience and technical implementation was impressive. Our customers love the new interface.', 4, 'Increased user engagement by 65% and reduced support tickets by 30%', false, true, 4);
+
+-- Insert test appointments
+INSERT INTO public.appointments (name, email, phone, date, time, message, status) VALUES
+('John Smith', 'john.smith@email.com', '+1-555-0123', '2024-02-15', '10:00:00', 'Interested in discussing a web development project for our e-commerce platform.', 'pending'),
+('Maria Garcia', 'maria.garcia@company.com', '+1-555-0456', '2024-02-16', '14:30:00', 'Need consultation for mobile app development. Looking to build iOS and Android apps.', 'confirmed'),
+('Alex Johnson', 'alex@startup.io', '+1-555-0789', '2024-02-14', '09:00:00', 'Seeking help with cloud infrastructure and DevOps setup for our growing platform.', 'completed'),
+('Rachel Brown', 'rachel.brown@enterprise.com', '+1-555-0321', '2024-02-17', '16:00:00', 'Want to explore AI/ML integration possibilities for our existing system.', 'pending');
+
+-- Insert test contact submissions
+INSERT INTO public.contact_submissions (name, email, subject, message) VALUES
+('Tom Wilson', 'tom.wilson@email.com', 'Web Development Inquiry', 'Hi, I am interested in getting a quote for developing a custom web application for my business. The project involves user authentication, payment processing, and a dashboard for analytics. Please let me know your availability for a consultation.'),
+('Sophie Martin', 'sophie@retailco.com', 'E-commerce Platform', 'We are looking to rebuild our e-commerce platform with modern technologies. Our current site is slow and difficult to maintain. We need something scalable that can handle high traffic during sales events.'),
+('Daniel Lee', 'daniel.lee@fintech.com', 'Mobile App Development', 'Our fintech startup needs a secure mobile application for both iOS and Android. The app will handle sensitive financial data, so security is our top priority. When can we schedule a meeting to discuss requirements?'),
+('Amanda Foster', 'amanda@healthtech.com', 'Healthcare Software', 'We need help developing a HIPAA-compliant patient management system. The software should integrate with existing medical devices and provide real-time monitoring capabilities. Looking forward to your response.');
