@@ -3,57 +3,16 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Calendar, ArrowRight, Newspaper, X } from "lucide-react"; // Added X for close button
+import { Calendar, ArrowRight, Newspaper, X } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
-// Mock data for news articles
-const newsArticles = [
-  {
-    id: 1,
-    title: "AHDUS Technology Launches New AI-Powered Analytics Platform",
-    date: "2024-07-25",
-    excerpt: "Our latest platform revolutionizes data analysis with advanced AI algorithms, providing deeper insights and actionable intelligence for businesses.",
-    fullContent: "In a significant leap forward for enterprise data solutions, AHDUS Technology today announced the official launch of its groundbreaking AI-Powered Analytics Platform. This innovative platform integrates state-of-the-art machine learning algorithms to process vast datasets, uncovering hidden patterns and delivering predictive insights that were previously unattainable. 'We believe this platform will empower businesses to make faster, more informed decisions, transforming raw data into a strategic asset,' said [CEO Name], CEO of AHDUS Technology. The platform features intuitive dashboards, real-time reporting, and customizable AI models tailored to specific industry needs. Early adopters have reported significant improvements in operational efficiency and market responsiveness.",
-    image: "https://placehold.co/800x400/3B82F6/FFFFFF?text=AI+Platform"
-  },
-  {
-    id: 2,
-    title: "Partnership with Global Robotics Leader Announced",
-    date: "2024-07-20",
-    excerpt: "AHDUS Technology is proud to announce a strategic partnership aimed at integrating our AI solutions into next-generation robotics for industrial automation.",
-    fullContent: "AHDUS Technology and [Robotics Company Name], a global leader in industrial robotics, have officially signed a strategic partnership agreement. This collaboration will focus on embedding AHDUS's advanced AI and machine learning capabilities directly into [Robotics Company Name]'s robotic systems. The goal is to create more intelligent, autonomous, and efficient robotic solutions for manufacturing, logistics, and other heavy industries. 'This partnership represents a synergy of cutting-edge AI and robust hardware, promising a new era of automation,' stated [CTO Name], CTO of AHDUS Technology. The initial phase of the partnership will involve pilot projects in smart factories across Europe and Asia.",
-    image: "https://placehold.co/800x400/8B5CF6/FFFFFF?text=Robotics+Partnersh\nip"
-  },
-  {
-    id: 3,
-    title: "Innovating Sustainable AI: Our Commitment to Green Tech",
-    date: "2024-07-15",
-    excerpt: "Discover how AHDUS Technology is committed to developing environmentally friendly AI solutions, minimizing carbon footprint in our development processes.",
-    fullContent: "As part of our ongoing commitment to corporate social responsibility, AHDUS Technology is proud to unveil its 'Sustainable AI Initiative.' This program focuses on researching and implementing methods to reduce the energy consumption and carbon footprint associated with AI model training and deployment. 'Green technology isn't just a buzzword for us; it's a core principle guiding our innovation,' says [Head of R&D Name], Head of Research and Development. Efforts include optimizing algorithms for efficiency, utilizing renewable energy sources for data centers, and promoting sustainable practices throughout our supply chain. We believe that powerful AI can also be responsible AI.",
-    image: "https://placehold.co/800x400/10B981/FFFFFF?text=Green+AI"
-  },
-  {
-    id: 4,
-    title: "AHDUS Experts Share Insights at Tech Summit 2024",
-    date: "2024-07-10",
-    excerpt: "Our team members presented on the future of quantum computing and ethical AI at the prestigious International Tech Summit, receiving widespread acclaim.",
-    fullContent: "Leading experts from AHDUS Technology recently took center stage at the International Tech Summit 2024, a premier global event for technological innovation. Dr. [Expert Name], our Head of AI Ethics, delivered a compelling keynote on 'The Imperative of Ethical AI in a Connected World,' emphasizing the need for responsible AI development. Concurrently, [Another Expert Name], our Lead Quantum Researcher, presented groundbreaking findings on 'Accelerating Computation with Quantum Algorithms.' Both presentations were met with enthusiastic reception, sparking lively discussions and reinforcing AHDUS Technology's position at the forefront of technological thought leadership.",
-    image: "https://placehold.co/800x400/EC4899/FFFFFF?text=Tech+Summit"
-  },
-  {
-    id: 5,
-    title: "Expanding Our Global Footprint: New Office in Singapore",
-    date: "2024-07-01",
-    excerpt: "To better serve our growing client base in Asia-Pacific, AHDUS Technology proudly announces the opening of our new regional office in Singapore.",
-    fullContent: "AHDUS Technology is excited to announce the expansion of its global operations with the opening of a new regional office in Singapore. This strategic move strengthens our presence in the Asia-Pacific market and allows us to provide more localized support and services to our rapidly expanding client base in the region. 'Singapore's vibrant tech ecosystem and strategic location make it an ideal hub for our continued growth,' commented [VP of Sales Name], VP of Global Sales. The new office will house sales, support, and a dedicated R&D team focused on regional market needs.",
-    image: "https://placehold.co/800x400/6366F1/FFFFFF?text=Singapore+Office"
-  },
-];
 
 const Newsroom = () => {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newsArticles, setNewsArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     AOS.init({
@@ -62,6 +21,7 @@ const Newsroom = () => {
       easing: 'ease-out-cubic',
     });
     AOS.refresh();
+    fetchNewsArticles();
 
     // Disable scroll when modal is open
     if (isModalOpen) {
@@ -74,6 +34,28 @@ const Newsroom = () => {
     };
   }, [isModalOpen]);
 
+  const fetchNewsArticles = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('news_posts')
+        .select('*')
+        .eq('status', 'published')
+        .order('published_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching news articles:', error);
+        return;
+      }
+
+      setNewsArticles(data || []);
+    } catch (error) {
+      console.error('Error fetching news articles:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   const openModal = (article) => {
     setSelectedArticle(article);
     setIsModalOpen(true);
@@ -83,6 +65,18 @@ const Newsroom = () => {
     setIsModalOpen(false);
     setSelectedArticle(null);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
+        <Navigation />
+        <div className="pt-16 flex items-center justify-center h-96">
+          <p className="text-muted-foreground">Loading news articles...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -155,7 +149,7 @@ const Newsroom = () => {
                   {/* Article Image */}
                   <div className="relative h-48 w-full mb-4 rounded-lg overflow-hidden">
                     <img 
-                      src={article.image} 
+                      src={article.featured_image || `https://placehold.co/800x400/CCCCCC/333333?text=News+Image`} 
                       alt={article.title} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/800x400/CCCCCC/333333?text=News+Image`; }} // Fallback image
@@ -164,7 +158,7 @@ const Newsroom = () => {
 
                   <div className="flex items-center text-sm text-muted-foreground mb-3 relative z-10">
                     <Calendar className="w-4 h-4 mr-2" />
-                    {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    {new Date(article.published_at || article.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                   </div>
                   
                   <h3 className="text-xl font-display font-bold mb-3 gradient-text group-hover:text-primary-glow transition-colors duration-300 relative z-10 line-clamp-2">
@@ -225,12 +219,12 @@ const Newsroom = () => {
             </h2>
             <div className="flex items-center text-sm text-muted-foreground mb-6">
               <Calendar className="w-4 h-4 mr-2" />
-              {new Date(selectedArticle.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              {new Date(selectedArticle.published_at || selectedArticle.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </div>
-            {selectedArticle.image && (
+            {selectedArticle.featured_image && (
               <div className="mb-6 rounded-lg overflow-hidden">
                 <img 
-                  src={selectedArticle.image} 
+                  src={selectedArticle.featured_image} 
                   alt={selectedArticle.title} 
                   className="w-full h-auto object-cover" 
                   onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/800x400/CCCCCC/333333?text=News+Image`; }} // Fallback image
@@ -238,7 +232,7 @@ const Newsroom = () => {
               </div>
             )}
             <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-              {selectedArticle.fullContent}
+              {selectedArticle.content}
             </p>
           </div>
         </div>

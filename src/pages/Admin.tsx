@@ -225,6 +225,14 @@ const Admin = () => {
           <TabsContent value="careers">
             <JobManagement />
           </TabsContent>
+
+          <TabsContent value="blog">
+            <BlogManagement />
+          </TabsContent>
+
+          <TabsContent value="news">
+            <NewsManagement />
+          </TabsContent>
         </Tabs>
       </main>
     </div>
