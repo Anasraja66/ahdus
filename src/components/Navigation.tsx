@@ -82,11 +82,12 @@ const Navigation = () => {
 
             <div className="relative group">
               <button className="flex items-center text-foreground hover:text-primary transition-colors transition-transform duration-200 ease-out hover:scale-105 text-sm font-medium focus:outline-none">
-                Solutions <ChevronDown className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" />
+                <a href="/solutions" className="flex items-center">
+                  Solutions <ChevronDown className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" />
+                </a>
               </button>
               <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-48 rounded-md shadow-lg bg-popover border border-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-out origin-top">
                 <div className="py-1" role="menu">
-                  <a href="/solutions" className="block px-4 py-2 text-sm text-popover-foreground hover:bg-accent transition-colors" role="menuitem">All Solutions</a>
                   <a href="/cross-platform-apps" className="block px-4 py-2 text-sm text-popover-foreground hover:bg-accent transition-colors" role="menuitem">Cross-Platform Apps</a>
                   <a href="/shopify-ecommerce" className="block px-4 py-2 text-sm text-popover-foreground hover:bg-accent transition-colors" role="menuitem">Shopify E-Commerce</a>
                   <a href="/devops-agile" className="block px-4 py-2 text-sm text-popover-foreground hover:bg-accent transition-colors" role="menuitem">DevOps & Agile</a>
@@ -153,11 +154,12 @@ const Navigation = () => {
                 Home
               </a>
               
+              <a href="/solutions" className="block px-6 py-3 text-popover-foreground hover:bg-accent transition-colors text-sm font-medium">
+                Solutions
+              </a>
+              
               <div className="px-6 py-2">
                 <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide mb-2">Solutions</div>
-                <a href="/solutions" className="block px-3 py-2 text-popover-foreground hover:bg-accent transition-colors text-sm rounded-lg">
-                  All Solutions
-                </a>
                 <a href="/cross-platform-apps" className="block px-3 py-2 text-popover-foreground hover:bg-accent transition-colors text-sm rounded-lg">
                   Cross-Platform Apps
                 </a>

@@ -50,14 +50,14 @@ const TeamSection = () => {
   };
 
   return (
-    <section id="team" className="py-24 bg-gradient-dark">
+    <section id="team" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16" data-aos="fade-up"> {/* Added AOS animation */}
-          <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">
+        <div className="text-center mb-16" data-aos="fade-up">
+          <h2 className="text-4xl md:text-6xl font-display font-bold mb-6 text-foreground">
             Meet Our <span className="gradient-text">Expert Team</span>
           </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Our world-class team of AI researchers, engineers, and technology leaders
             drive innovation and deliver exceptional results for our clients.
           </p>
@@ -67,11 +67,11 @@ const TeamSection = () => {
         {loading ? (
           <div className="text-center py-12">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-2 text-white/60">Loading team...</p>
+            <p className="mt-2 text-muted-foreground">Loading team...</p>
           </div>
         ) : teamMembers.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-white/60">No team members found.</p>
+            <p className="text-muted-foreground">No team members found.</p>
           </div>
         ) : teamMembers.length > 4 ? (
           <Carousel
@@ -86,7 +86,7 @@ const TeamSection = () => {
               {teamMembers.map((member, index) => (
                 <CarouselItem key={member.name} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                   <div
-                    className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 hover:shadow-glow hover:scale-105 h-full"
+                    className="group glass-card rounded-2xl p-6 hover:shadow-premium transition-all duration-500 hover:scale-105 h-full"
                     data-aos="fade-up"
                     data-aos-delay={index * 150}
                   >
@@ -101,14 +101,14 @@ const TeamSection = () => {
                       </div>
                       <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
                         <div className="w-6 h-6 bg-gradient-primary rounded-full flex items-center justify-center">
-                          <div className="w-2 h-2 bg-white rounded-full" />
+                          <div className="w-2 h-2 bg-primary-foreground rounded-full" />
                         </div>
                       </div>
                     </div>
 
                     {/* Content */}
                     <div className="text-center flex flex-col h-full">
-                      <h3 className="text-xl font-display font-bold text-white mb-2 group-hover:text-primary-glow transition-colors">
+                      <h3 className="text-xl font-display font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                         {member.name}
                       </h3>
 
@@ -120,7 +120,7 @@ const TeamSection = () => {
                         {member.expertise?.join(', ') || 'Expert'}
                       </p>
 
-                      <p className="text-white/60 text-sm leading-relaxed mb-6 flex-grow">
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
                         {member.bio}
                       </p>
 
@@ -129,25 +129,25 @@ const TeamSection = () => {
                         {member.linkedin_url && (
                           <a
                             href={member.linkedin_url}
-                            className="p-2 bg-white/10 rounded-lg hover:bg-primary/20 transition-colors group"
+                            className="p-2 bg-secondary rounded-lg hover:bg-primary/20 transition-colors group"
                           >
-                            <Linkedin className="w-4 h-4 text-white/60 group-hover:text-primary transition-colors" />
+                            <Linkedin className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                           </a>
                         )}
                         {member.github_url && (
                           <a
                             href={member.github_url}
-                            className="p-2 bg-white/10 rounded-lg hover:bg-accent/20 transition-colors group"
+                            className="p-2 bg-secondary rounded-lg hover:bg-accent/20 transition-colors group"
                           >
-                            <Github className="w-4 h-4 text-white/60 group-hover:text-accent transition-colors" />
+                            <Github className="w-4 h-4 text-muted-foreground group-hover:text-accent transition-colors" />
                           </a>
                         )}
                         {member.email && (
                           <a
                             href={`mailto:${member.email}`}
-                            className="p-2 bg-white/10 rounded-lg hover:bg-primary-glow/20 transition-colors group"
+                            className="p-2 bg-secondary rounded-lg hover:bg-primary/20 transition-colors group"
                           >
-                            <Mail className="w-4 h-4 text-white/60 group-hover:text-primary-glow transition-colors" />
+                            <Mail className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                           </a>
                         )}
                       </div>
@@ -164,7 +164,7 @@ const TeamSection = () => {
             {teamMembers.map((member, index) => (
             <div
               key={member.name}
-              className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 hover:shadow-glow hover:scale-105"
+              className="group glass-card rounded-2xl p-6 hover:shadow-premium transition-all duration-500 hover:scale-105"
               data-aos="fade-up"
               data-aos-delay={index * 150}
             >
@@ -179,14 +179,14 @@ const TeamSection = () => {
                 </div>
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
                   <div className="w-6 h-6 bg-gradient-primary rounded-full flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full" />
+                    <div className="w-2 h-2 bg-primary-foreground rounded-full" />
                   </div>
                 </div>
               </div>
 
               {/* Content */}
               <div className="text-center">
-                <h3 className="text-xl font-display font-bold text-white mb-2 group-hover:text-primary-glow transition-colors">
+                <h3 className="text-xl font-display font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                   {member.name}
                 </h3>
 
@@ -198,7 +198,7 @@ const TeamSection = () => {
                   {member.expertise?.join(', ') || 'Expert'}
                 </p>
 
-                <p className="text-white/60 text-sm leading-relaxed mb-6">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                   {member.bio}
                 </p>
 
@@ -207,25 +207,25 @@ const TeamSection = () => {
                   {member.linkedin_url && (
                     <a
                       href={member.linkedin_url}
-                      className="p-2 bg-white/10 rounded-lg hover:bg-primary/20 transition-colors group"
+                      className="p-2 bg-secondary rounded-lg hover:bg-primary/20 transition-colors group"
                     >
-                      <Linkedin className="w-4 h-4 text-white/60 group-hover:text-primary transition-colors" />
+                      <Linkedin className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     </a>
                   )}
                   {member.github_url && (
                     <a
                       href={member.github_url}
-                      className="p-2 bg-white/10 rounded-lg hover:bg-accent/20 transition-colors group"
+                      className="p-2 bg-secondary rounded-lg hover:bg-accent/20 transition-colors group"
                     >
-                      <Github className="w-4 h-4 text-white/60 group-hover:text-accent transition-colors" />
+                      <Github className="w-4 h-4 text-muted-foreground group-hover:text-accent transition-colors" />
                     </a>
                   )}
                   {member.email && (
                     <a
                       href={`mailto:${member.email}`}
-                      className="p-2 bg-white/10 rounded-lg hover:bg-primary-glow/20 transition-colors group"
+                      className="p-2 bg-secondary rounded-lg hover:bg-primary/20 transition-colors group"
                     >
-                      <Mail className="w-4 h-4 text-white/60 group-hover:text-primary-glow transition-colors" />
+                      <Mail className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     </a>
                   )}
                 </div>

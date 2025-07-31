@@ -141,43 +141,15 @@ const CrossPlatformApps = () => {
 
         /* Custom Gradients */
         .bg-gradient-primary {
-          background: linear-gradient(135deg, #6366F1, #8B5CF6); /* Indigo to Violet */
+          background: var(--gradient-primary);
         }
         .bg-gradient-accent {
-          background: linear-gradient(135deg, #06B6D4, #22D3EE); /* Teal to Aqua */
+          background: var(--gradient-accent);
         }
         .gradient-text {
-          background: linear-gradient(45deg, #8B5CF6, #06B6D4); /* Violet to Teal */
+          background: var(--gradient-primary);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-        }
-        .bg-primary-dark {
-          background-color: #1a202c; /* Dark charcoal */
-        }
-        .bg-primary-light {
-          background-color: #2d3748; /* Lighter charcoal */
-        }
-        .bg-black-900 {
-          background-color: #111827; /* Deeper dark gray */
-        }
-        .bg-black-950 {
-          background-color: #0F172A; /* Even deeper dark gray */
-        }
-
-        /* Glassmorphism Effect */
-        .glass-card {
-          background: rgba(255, 255, 255, 0.08);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-        }
-        .glass-card-border {
-          background: rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
         }
 
         /* Custom Animations */
@@ -227,28 +199,28 @@ const CrossPlatformApps = () => {
       <Navigation />
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="py-32 relative overflow-hidden bg-gradient-to-br from-gray-900 to-black-950 animated-hero-background">
+        <section className="py-32 relative overflow-hidden bg-background animated-hero-background tech-mesh">
           {/* Subtle background pattern for depth */}
           <div className="absolute inset-0 z-0 opacity-10">
             <div className="w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20" />
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center" data-aos="fade-up" data-aos-duration="1000">
-              <h1 className="text-5xl md:text-8xl font-display font-extrabold text-white mb-8 leading-tight drop-shadow-lg" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1200">
+              <h1 className="text-5xl md:text-8xl font-display font-extrabold text-foreground mb-8 leading-tight drop-shadow-lg" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1200">
                 Cross-Platform App
                 <span className="block gradient-text relative z-10 text-7xl md:text-9xl mt-2">Development Done Right</span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1200">
+              <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1200">
                 **Launch everywhere, faster.** Build once, deploy seamlessly across Android, iOS, and beyond.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="1000">
-                <Button size="xl" className="bg-gradient-primary text-white font-semibold shadow-lg hover:shadow-primary-glow/50 hover:scale-105 transition-all duration-300 transform-gpu rounded-full px-8 py-4 text-lg" asChild>
+                <Button size="xl" className="bg-primary hover:bg-primary/80 text-primary-foreground font-semibold shadow-premium hover:scale-105 transition-all duration-300 transform-gpu rounded-full px-8 py-4 text-lg" asChild>
                   <a href="/contact">
                     Get Your Free MVP Roadmap
                     <ArrowRight className="ml-3 w-6 h-6" />
                   </a>
                 </Button>
-                <Button variant="outline" size="xl" className="border-white/30 text-white hover:bg-white/10 hover:text-primary-glow transition-all duration-300 rounded-full px-8 py-4 text-lg" asChild>
+                <Button variant="outline" size="xl" className="border-border text-foreground hover:bg-accent hover:text-accent-foreground transition-all duration-300 rounded-full px-8 py-4 text-lg" asChild>
                   <a href="#benefits">
                     Learn More
                     <ArrowRight className="ml-3 w-6 h-6" />
@@ -327,7 +299,7 @@ const CrossPlatformApps = () => {
         </section>
 
         {/* Section 2: MVP Planning Done Right */}
-        <section className="py-24 bg-gradient-to-br from-black-900 to-gray-950 animated-background-2 relative overflow-hidden">
+        <section className="py-24 bg-muted animated-background-2 relative overflow-hidden tech-mesh">
           {/* Background pattern */}
           <div className="absolute inset-0 z-0 opacity-10">
             <div className="w-full h-full bg-[url('https://www.transparenttextures.com/patterns/diagmonds.png')] opacity-10" />
