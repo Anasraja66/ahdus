@@ -20,6 +20,7 @@ interface TeamMember {
   expertise?: string[];
   display_order: number;
   active: boolean;
+  page_type?: 'landing' | 'about';
 }
 
 const TeamManagement = () => {
@@ -46,7 +47,10 @@ const TeamManagement = () => {
         variant: "destructive"
       });
     } else {
-      setMembers(data || []);
+      setMembers((data || []).map(member => ({
+        ...member,
+        page_type: member.page_type as 'landing' | 'about'
+      })));
     }
     setLoading(false);
   };
@@ -54,21 +58,22 @@ const TeamManagement = () => {
   const handleSave = async (member: Partial<TeamMember>) => {
     if (member.id) {
       // Update existing member
-      const { error } = await supabase
-        .from('team_members')
-        .update({
-          name: member.name,
-          role: member.role,
-          email: member.email,
-          bio: member.bio,
-          image: member.image,
-          linkedin_url: member.linkedin_url,
-          github_url: member.github_url,
-          expertise: member.expertise?.filter(e => e.trim() !== ''),
-          display_order: member.display_order,
-          active: member.active
-        })
-        .eq('id', member.id);
+        const { error } = await supabase
+          .from('team_members')
+          .update({
+            name: member.name,
+            role: member.role,
+            email: member.email,
+            bio: member.bio,
+            image: member.image,
+            linkedin_url: member.linkedin_url,
+            github_url: member.github_url,
+            expertise: member.expertise?.filter(e => e.trim() !== ''),
+            display_order: member.display_order,
+            active: member.active,
+            page_type: member.page_type || 'landing'
+          })
+          .eq('id', member.id);
 
       if (error) {
         toast({
@@ -83,20 +88,21 @@ const TeamManagement = () => {
       }
     } else {
       // Add new member
-      const { error } = await supabase
-        .from('team_members')
-        .insert({
-          name: member.name,
-          role: member.role,
-          email: member.email,
-          bio: member.bio,
-          image: member.image,
-          linkedin_url: member.linkedin_url,
-          github_url: member.github_url,
-          expertise: member.expertise?.filter(e => e.trim() !== ''),
-          display_order: member.display_order || 0,
-          active: member.active ?? true
-        });
+        const { error } = await supabase
+          .from('team_members')
+          .insert({
+            name: member.name,
+            role: member.role,
+            email: member.email,
+            bio: member.bio,
+            image: member.image,
+            linkedin_url: member.linkedin_url,
+            github_url: member.github_url,
+            expertise: member.expertise?.filter(e => e.trim() !== ''),
+            display_order: member.display_order || 0,
+            active: member.active ?? true,
+            page_type: member.page_type || 'landing'
+          });
 
       if (error) {
         toast({
@@ -145,7 +151,8 @@ const TeamManagement = () => {
       github_url: member?.github_url || '',
       expertise: member?.expertise?.join(', ') || '',
       display_order: member?.display_order || 0,
-      active: member?.active ?? true
+      active: member?.active ?? true,
+      page_type: member?.page_type || 'landing'
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -164,7 +171,7 @@ const TeamManagement = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div>
                 <Label htmlFor="name">Name *</Label>
                 <Input
@@ -182,6 +189,19 @@ const TeamManagement = () => {
                   onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                   required
                 />
+              </div>
+              <div>
+                <Label htmlFor="page_type">Page Display *</Label>
+                <select
+                  id="page_type"
+                  value={formData.page_type}
+                  onChange={(e) => setFormData({ ...formData, page_type: e.target.value as 'landing' | 'about' })}
+                  className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  required
+                >
+                  <option value="landing">Landing Page</option>
+                  <option value="about">About Page</option>
+                </select>
               </div>
             </div>
 
@@ -328,7 +348,7 @@ const TeamManagement = () => {
                     </p>
                   )}
                   <p className="text-xs text-muted-foreground mt-1">
-                    Order: {member.display_order} | Status: {member.active ? 'Active' : 'Inactive'}
+                    Order: {member.display_order} | Status: {member.active ? 'Active' : 'Inactive'} | Page: {member.page_type || 'landing'}
                   </p>
                 </div>
                 <div className="flex space-x-2">

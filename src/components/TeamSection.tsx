@@ -2,6 +2,8 @@ import { Linkedin, Github, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { supabase } from '@/integrations/supabase/client';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -38,6 +40,7 @@ const TeamSection = () => {
       .from('team_members')
       .select('*')
       .eq('active', true)
+      .eq('page_type', 'landing')
       .order('display_order', { ascending: true });
 
     if (!error && data) {
@@ -66,14 +69,104 @@ const TeamSection = () => {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
             <p className="mt-2 text-white/60">Loading team...</p>
           </div>
-        ) : teamMembers.length > 0 ? (
+        ) : teamMembers.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-white/60">No team members found.</p>
+          </div>
+        ) : teamMembers.length > 4 ? (
+          <Carousel
+            className="w-full max-w-6xl mx-auto mb-16"
+            plugins={[
+              Autoplay({
+                delay: 3000,
+              }),
+            ]}
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {teamMembers.map((member, index) => (
+                <CarouselItem key={member.name} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                  <div
+                    className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 hover:shadow-glow hover:scale-105 h-full"
+                    data-aos="fade-up"
+                    data-aos-delay={index * 150}
+                  >
+                    {/* Profile Image */}
+                    <div className="relative mb-6">
+                      <div className="w-32 h-32 mx-auto rounded-full overflow-hidden ring-4 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                        <div className="w-6 h-6 bg-gradient-primary rounded-full flex items-center justify-center">
+                          <div className="w-2 h-2 bg-white rounded-full" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="text-center flex flex-col h-full">
+                      <h3 className="text-xl font-display font-bold text-white mb-2 group-hover:text-primary-glow transition-colors">
+                        {member.name}
+                      </h3>
+
+                      <p className="text-primary text-sm font-medium mb-2">
+                        {member.role}
+                      </p>
+
+                      <p className="text-accent text-xs mb-4">
+                        {member.expertise?.join(', ') || 'Expert'}
+                      </p>
+
+                      <p className="text-white/60 text-sm leading-relaxed mb-6 flex-grow">
+                        {member.bio}
+                      </p>
+
+                      {/* Social Links */}
+                      <div className="flex justify-center space-x-3 mt-auto">
+                        {member.linkedin_url && (
+                          <a
+                            href={member.linkedin_url}
+                            className="p-2 bg-white/10 rounded-lg hover:bg-primary/20 transition-colors group"
+                          >
+                            <Linkedin className="w-4 h-4 text-white/60 group-hover:text-primary transition-colors" />
+                          </a>
+                        )}
+                        {member.github_url && (
+                          <a
+                            href={member.github_url}
+                            className="p-2 bg-white/10 rounded-lg hover:bg-accent/20 transition-colors group"
+                          >
+                            <Github className="w-4 h-4 text-white/60 group-hover:text-accent transition-colors" />
+                          </a>
+                        )}
+                        {member.email && (
+                          <a
+                            href={`mailto:${member.email}`}
+                            className="p-2 bg-white/10 rounded-lg hover:bg-primary-glow/20 transition-colors group"
+                          >
+                            <Mail className="w-4 h-4 text-white/60 group-hover:text-primary-glow transition-colors" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
+        ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {teamMembers.map((member, index) => (
             <div
               key={member.name}
               className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 hover:shadow-glow hover:scale-105"
-              data-aos="fade-up" // AOS animation for each card
-              data-aos-delay={index * 150} // Staggered delay for each card
+              data-aos="fade-up"
+              data-aos-delay={index * 150}
             >
               {/* Profile Image */}
               <div className="relative mb-6">
@@ -139,10 +232,6 @@ const TeamSection = () => {
               </div>
             </div>
             ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-white/60">No team members found.</p>
           </div>
         )}
 

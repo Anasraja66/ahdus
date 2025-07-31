@@ -325,6 +325,7 @@ export type Database = {
           image: string | null
           linkedin_url: string | null
           name: string
+          page_type: string
           role: string
           updated_at: string
         }
@@ -340,6 +341,7 @@ export type Database = {
           image?: string | null
           linkedin_url?: string | null
           name: string
+          page_type?: string
           role: string
           updated_at?: string
         }
@@ -355,6 +357,7 @@ export type Database = {
           image?: string | null
           linkedin_url?: string | null
           name?: string
+          page_type?: string
           role?: string
           updated_at?: string
         }

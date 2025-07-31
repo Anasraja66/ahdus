@@ -18,8 +18,14 @@ import {
   Heart,
   Zap,
   Coffee,
-  Plus
+  Plus,
+  Linkedin,
+  Github,
+  Mail
 } from "lucide-react";
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { supabase } from '@/integrations/supabase/client';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Masonry from 'react-masonry-css'; // Import Masonry component
@@ -233,22 +239,134 @@ const WeAreDevelopers = () => {
     }
   ];
 
-  const teamMembers = [
-    { name: "Zahid Iqbal", role: "Board Member & Director", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" },
-    { name: "Toshko Ivanov", role: "Chief Technology Innovation Officer", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" },
-    { name: "Iram Shahid Kiani", role: "Global Business Development Manager", image: "https://images.unsplash.com/photo-1494790108755-2616b612b2e5?w=400&h=400&fit=crop&crop=face" },
-    { name: "Fatima Aftab", role: "Digital Content Creator", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face" },
-    { name: "Faiza Arif", role: "Test Specialist", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face" },
-    { name: "M. Ali Mughal", role: "Sr. PHP Developer", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face" },
-    { name: "Dawood Asjad", role: "E-commerce Web Developer & Business Consultant", image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop&crop=face" },
-    { name: "Ikrima Mubeen", role: "Digital Marketing Consultant", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face" },
-    { name: "Haseeb Zia", role: "Global Business Development Manager", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face" },
-    { name: "Sheharyar Shahid", role: "Xamarin Mobile Developer", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=400&h=400&fit=crop&crop=face" },
-    { name: "Talha Mohsin", role: "Full Stack Developer", image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&crop=face" },
-    { name: "Ayub Shah", role: "Shopify & WordPress Developer", image: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=400&fit=crop&crop=face" },
-    { name: "Hassan Tariq", role: "Global Business Development Manager", image: "https://images.unsplash.com/photo-1521119989659-a83eee488004?w=400&h=400&fit=crop&crop=face" },
-    { name: "Mohsin Mushtaq", role: ".Net Developer", image: "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?w=400&h=400&fit=crop&crop=face" }
-  ];
+  // Component to fetch and display about page team members
+  const AboutTeamSection = () => {
+    const [aboutTeamMembers, setAboutTeamMembers] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      const fetchAboutTeamMembers = async () => {
+        try {
+          const { data, error } = await supabase
+            .from('team_members')
+            .select('*')
+            .eq('active', true)
+            .eq('page_type', 'about')
+            .order('display_order', { ascending: true });
+
+          if (error) throw error;
+          setAboutTeamMembers(data || []);
+        } catch (error) {
+          console.error('Error fetching about team members:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchAboutTeamMembers();
+    }, []);
+
+    if (loading) {
+      return (
+        <div className="flex justify-center items-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        </div>
+      );
+    }
+
+    if (aboutTeamMembers.length === 0) {
+      return (
+        <p className="text-center text-muted-foreground">No team members found for the about page.</p>
+      );
+    }
+
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {aboutTeamMembers.map((member, index) => (
+          <Card
+            key={member.id}
+            className="glass-card-border group relative overflow-hidden border border-border bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            data-aos="card-reveal"
+            data-aos-delay={index * 150}
+            data-aos-duration="800"
+          >
+            <CardContent className="p-6 text-center">
+              <div className="team-member-image-wrapper relative mb-4 overflow-hidden rounded-full w-24 h-24 mx-auto">
+                {member.image ? (
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="team-member-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                    <span className="text-2xl font-bold text-primary">
+                      {member.name.charAt(0)}
+                    </span>
+                  </div>
+                )}
+              </div>
+              
+              <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                {member.name}
+              </h3>
+              
+              <p className="text-sm text-muted-foreground mb-3">
+                {member.role}
+              </p>
+              
+              {member.expertise && member.expertise.length > 0 && (
+                <div className="flex flex-wrap gap-1 justify-center mb-4">
+                  {member.expertise.slice(0, 3).map((skill: string, skillIndex: number) => (
+                    <Badge key={skillIndex} variant="secondary" className="text-xs">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+              
+              {member.bio && (
+                <p className="text-xs text-muted-foreground mb-4 line-clamp-3">
+                  {member.bio}
+                </p>
+              )}
+              
+              <div className="flex justify-center space-x-3">
+                {member.linkedin_url && (
+                  <a
+                    href={member.linkedin_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                )}
+                {member.github_url && (
+                  <a
+                    href={member.github_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
+                    <Github className="w-4 h-4" />
+                  </a>
+                )}
+                {member.email && (
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
+                    <Mail className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    );
+  };
 
 
   return (
@@ -633,40 +751,7 @@ const WeAreDevelopers = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {teamMembers.map((member, index) => (
-                <div
-                  key={member.name}
-                  className="glass-card rounded-2xl p-6 text-center hover-lift border border-white/10 group"
-                  data-aos="card-reveal" // Custom AOS animation
-                  data-aos-delay={index * 100}
-                  data-aos-duration="1000"
-                >
-                  <div className="relative mb-6 team-member-image-wrapper">
-                    <div className="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover team-member-image" // Added class for specific animation
-                      />
-                    </div>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                      <div className="w-4 h-4 bg-gradient-primary rounded-full flex items-center justify-center">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <h3 className="text-lg font-bold text-foreground mb-2 group-hover:gradient-text transition-all duration-300">
-                    {member.name}
-                  </h3>
-
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {member.role}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <AboutTeamSection />
           </div>
         </section>
 
