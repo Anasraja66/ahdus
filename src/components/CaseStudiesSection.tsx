@@ -1,46 +1,60 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Heart, Cloud, GraduationCap, ShoppingCart, Smartphone } from "lucide-react";
+import { ArrowRight, Brain, Heart, Cloud, GraduationCap, ShoppingCart, Smartphone, Building2, Shield, Code, Camera } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
-const caseStudies = [
-      {
-          id: 7,
-          title: "Writeomatic App: Agentic AI Powerhouse for Copywriting",
-          category: "AI & SaaS Development",
-          industry: "Marketing & Content Creation",
-          summary: "Developed Writeomatic, an AI-powered agentic application for automated copywriting, enabling users to generate high-quality, long-form content, optimize for SEO, and streamline content creation processes.",
-          impact: "Revolutionized content creation process",
-          icon: Brain,
-          image: "/Writeomatic-App.jpg",
-          tags: ["AI", "Agentic AI", "SaaS", "Copywriting", "Content Generation", "SEO Optimization"],
-          readMore: "https://ahdustechnology.fi/case-study-building-writeomatic-app-agentic-ai-powerhouse-for-copywriting/"
-        },
-    {
-      id: 2,
-      title: "Mobile App Development for Gas Bottle Monitoring",
-      category: "App Development",
-      industry: "Manufacturing / IoT",
-      summary: "Developed a highly-rated iOS and Android mobile app using Flutter for Gastimate Technologies GmbH to monitor and order gas bottles, including UX/UI design and testing.",
-      impact: "Highly rated on App Stores",
-      icon: Smartphone,
-      image: "/Mobile App Development for Gas Bottle Monitoring.jpg",
-      tags: ["Mobile App", "Flutter", "iOS", "Android", "UX/UI Design", "IoT"],
-      readMore: "https://ahdustechnology.com/wp-content/uploads/2025/06/Mobile_App_Development_for_Manufacturing_Company.pdf"
-    },
-    {
-      id: 3,
-      title: "Application Development & Maintenance for Educational Institution",
-      category: "Custom Software Development",
-      industry: "Education",
-      summary: "Provided ongoing app maintenance and development services for Zaigen GmbH, an educational institution, including application updates and building new modules and admin panels.",
-      impact: "High-quality, proactive solutions",
-      icon: GraduationCap,
-      image: "/edu-institute.jpg",
-      tags: ["Custom Software", "App Maintenance", "PHP", "Firewall", "Education"],
-      readMore: "https://ahdustechnology.com/wp-content/uploads/2025/06/App_Dev__Maintenance_for_Educational_Institution.pdf"
-    },
-];
+const iconMap = {
+  Brain,
+  Heart,
+  Cloud,
+  GraduationCap,
+  ShoppingCart,
+  Smartphone,
+  Building2,
+  Shield,
+  Code,
+  Camera
+};
 
 const CaseStudiesSection = () => {
+  const [caseStudies, setCaseStudies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchCaseStudies();
+  }, []);
+
+  const fetchCaseStudies = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('case_studies')
+        .select('*')
+        .eq('featured', true)
+        .order('display_order', { ascending: true })
+        .limit(3);
+
+      if (error) {
+        console.error('Error fetching case studies:', error);
+        return;
+      }
+
+      setCaseStudies(data || []);
+    } catch (error) {
+      console.error('Error fetching case studies:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <section className="py-32 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">Loading case studies...</div>
+        </div>
+      </section>
+    );
+  }
   return (
     <section className="py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,7 +71,7 @@ const CaseStudiesSection = () => {
         {/* Case Studies Grid */}
         <div className="grid lg:grid-cols-3 gap-8 mb-16">
           {caseStudies.map((study, index) => {
-            const Icon = study.icon;
+            const IconComponent = iconMap[study.icon] || Brain;
             
             return (
               <div
@@ -75,7 +89,7 @@ const CaseStudiesSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute top-4 left-4">
                     <div className="inline-flex p-2 rounded-lg bg-white/20 backdrop-blur-sm">
-                      <Icon className="w-5 h-5 text-white" />
+                      <IconComponent className="w-5 h-5 text-white" />
                     </div>
                   </div>
                   <div className="absolute bottom-4 right-4">

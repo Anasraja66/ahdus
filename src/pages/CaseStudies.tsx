@@ -27,6 +27,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { supabase } from "@/integrations/supabase/client";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -111,6 +112,8 @@ const AnimatedNumber = ({ value, duration = 2000, prefix = "", suffix = "" }) =>
 const CaseStudies = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [visibleStudiesCount, setVisibleStudiesCount] = useState(4); // State for load more
+  const [caseStudies, setCaseStudies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // AOS Initialization
   useEffect(() => {
@@ -122,7 +125,28 @@ const CaseStudies = () => {
       offset: 120,
     });
     AOS.refresh();
+    fetchCaseStudies();
   }, []);
+
+  const fetchCaseStudies = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('case_studies')
+        .select('*')
+        .order('display_order', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching case studies:', error);
+        return;
+      }
+
+      setCaseStudies(data || []);
+    } catch (error) {
+      console.error('Error fetching case studies:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const categories = [
     { name: "All", icon: Filter },
@@ -133,116 +157,23 @@ const CaseStudies = () => {
     { name: "Digital Transformation", icon: TrendingUp }
   ];
 
-  const caseStudies = [
-  {
-    id: 1,
-    title: "Intelligent Web-Crawler for 100 E-Commerce Webshops",
-    category: "AI & Web Development",
-    industry: "E-commerce",
-    summary: "Developed an intelligent web crawler for 300+ B2B e-commerce webshops for a toy distributor, automating product, category, price, and inventory data collection with 24/7 efficiency.",
-    impact: "100% efficiency in data collection",
-    icon: ShoppingCart,
-    image: "/public/Web-Crawler.jpg",
-    tags: ["Web Crawling", "AI", "Data Extraction", "E-commerce", "JAVA", "PHP"],
-    readMore: "https://ahdustechnology.com/wp-content/uploads/2025/05/Intelligent-Web-Crawler-for-100-E-Commerce-Webshops-for-Kids-Toys.pdf"
-  },
-  {
-    id: 2,
-    title: "Mobile App Development for Gas Bottle Monitoring",
-    category: "App Development",
-    industry: "Manufacturing / IoT",
-    summary: "Developed a highly-rated iOS and Android mobile app using Flutter for Gastimate Technologies GmbH to monitor and order gas bottles, including UX/UI design and testing.",
-    impact: "Highly rated on App Stores",
-    icon: Smartphone,
-    image: "/public/Mobile App Development for Gas Bottle Monitoring.jpg",
-    tags: ["Mobile App", "Flutter", "iOS", "Android", "UX/UI Design", "IoT"],
-    readMore: "https://ahdustechnology.com/wp-content/uploads/2025/06/Mobile_App_Development_for_Manufacturing_Company.pdf"
-  },
-  {
-    id: 3,
-    title: "Application Development & Maintenance for Educational Institution",
-    category: "Custom Software Development",
-    industry: "Education",
-    summary: "Provided ongoing app maintenance and development services for Zaigen GmbH, an educational institution, including application updates and building new modules and admin panels.",
-    impact: "High-quality, proactive solutions",
-    icon: GraduationCap,
-    image: "/public/edu-institute.jpg",
-    tags: ["Custom Software", "App Maintenance", "PHP", "Firewall", "Education"],
-    readMore: "https://ahdustechnology.com/wp-content/uploads/2025/06/App_Dev__Maintenance_for_Educational_Institution.pdf"
-  },
-  {
-    id: 4,
-    title: "Custom Software Development & Legacy Application Review for IT Firm",
-    category: "Custom Software Development",
-    industry: "IT Services",
-    summary: "Performed an in-depth code review and provided support for three critical legacy custom applications for an IT Managed Services Firm, ensuring continuous operations.",
-    impact: "Avoided loss of operations",
-    icon: Code,
-    image: "/public/custom-software.jpg",
-    tags: ["Custom Software", "Code Review", "Legacy Systems", "IT Services"],
-    readMore: "https://ahdustechnology.com/wp-content/uploads/2025/06/Custom_Software_Development_for_IT_Services_Firm.pdf"
-  },
-  {
-    id: 5,
-    title: "Financial Portals for Gold & Precious Metal Saving Plans",
-    category: "Financial Software Development",
-    industry: "Finance",
-    summary: "Designed and developed end-to-end customer portals for Geiger Edelmetalle AG, enabling 80k+ German customers to buy/sell gold/silver, manage assets, and view market trends securely.",
-    impact: "80K+ German customers served",
-    icon: Building2,
-    image: "financial-services.jpg",
-    tags: ["Financial Portals", "Fintech", "Gold Investment", "PHP", "Laravel", "Vue.js"],
-    readMore: "https://ahdustechnology.com/wp-content/uploads/2023/03/Gold-Precious-Metal-Saving-Plans-Financial-Portals-for-More-than-80k-German-Customers.pdf"
-  },
-  {
-    id: 6,
-    title: "IoT-Based Security Patrolling System",
-    category: "IoT Solutions",
-    industry: "Security & Facilities Management",
-    summary: "Developed an intelligent IoT-based security system for Connect Security Solutions, enabling real-time monitoring of security activities from IoT devices and displaying KPIs on a dashboard.",
-    impact: "Real-time monitoring of hundreds of locations",
-    icon: Shield,
-    image: "/iot-security.jpg",
-    tags: ["IoT", "Security System", "Real-time Monitoring", "Dashboard", "AI"],
-    readMore: "https://ahdustechnology.com/wp-content/uploads/2025/05/IOT-CASE-STUDY-.pdf"
-  },
-  {
-    id: 7,
-    title: "Writeomatic App: Agentic AI Powerhouse for Copywriting",
-    category: "AI & SaaS Development",
-    industry: "Marketing & Content Creation",
-    summary: "Developed Writeomatic, an AI-powered agentic application for automated copywriting, enabling users to generate high-quality, long-form content, optimize for SEO, and streamline content creation processes.",
-    impact: "Revolutionized content creation process",
-    icon: Brain,
-    image: "/Writeomatic-App.jpg",
-    tags: ["AI", "Agentic AI", "SaaS", "Copywriting", "Content Generation", "SEO Optimization"],
-    readMore: "https://ahdustechnology.fi/case-study-building-writeomatic-app-agentic-ai-powerhouse-for-copywriting/"
-  },
-  {
-    id: 8,
-    title: "AI-Powered Viral Reel Creation",
-    category: "AI & Content Marketing",
-    industry: "Marketing & Social Media",
-    summary: "Leveraged AI to analyze social media trends and audience preferences to create engaging and viral short-form video content (reels), optimizing for maximum reach and impact.",
-    impact: "Increased content virality",
-    icon: Camera,
-    image: "/ai-reels.jpg",
-    tags: ["AI", "Video Content", "Social Media Marketing", "Content Strategy", "Viral Content"],
-    readMore: " https://ahdustechnology.fi/case-study-using-ai-to-create-viral-reels/#introduction"
-  },
-  {
-    id: 9,
-    title: "ERP App for Shopify Businesses: Inventory Management",
-    category: "ERP Development",
-    industry: "E-commerce",
-    summary: "Developed a comprehensive ERP application specifically for Shopify businesses to streamline and automate inventory management, order processing, and other critical business operations.",
-    impact: "Improved inventory accuracy",
-    icon: ShoppingCart,
-    image: "/shopify.jpg",
-    tags: ["ERP", "Shopify", "Inventory Management", "E-commerce", "Business Automation"],
-    readMore: "https://ahdustechnology.com/ahdus-erp-app-for-shopify-businesses-for-inventory-management"
-  }
-];
+  const iconMap = {
+    Brain,
+    Cloud,
+    Smartphone,
+    ShoppingCart,
+    TrendingUp,
+    Building2,
+    Heart,
+    Factory,
+    Shield,
+    Calendar,
+    Layers,
+    Code,
+    Lightbulb,
+    GraduationCap,
+    Camera
+  };
 
   const filteredCaseStudies = selectedCategory === "All"
     ? caseStudies
@@ -568,9 +499,15 @@ const CaseStudies = () => {
 
         {/* Case Studies Sections - Sticky Full Page Slides */}
         <div className="relative z-10"> {/* This wrapper defines the scroll area for sticky sections */}
-          {filteredCaseStudies.length > 0 ? (
+          {loading ? (
+            <section className="py-24 bg-background">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center">Loading case studies...</div>
+              </div>
+            </section>
+          ) : filteredCaseStudies.length > 0 ? (
             filteredCaseStudies.slice(0, visibleStudiesCount).map((study, index) => { // Slice the array
-              const Icon = study.icon;
+              const IconComponent = iconMap[study.icon] || Brain;
               const isEven = index % 2 === 0;
               const imageOrder = isEven ? "order-1" : "order-2";
               const contentOrder = isEven ? "order-2" : "order-1";
@@ -603,7 +540,7 @@ const CaseStudies = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                         <div className="absolute top-6 left-6">
                           <div className="inline-flex p-3 rounded-xl bg-white/20 backdrop-blur-sm">
-                            <Icon className="w-7 h-7 text-white" />
+                            <IconComponent className="w-7 h-7 text-white" />
                           </div>
                         </div>
                         <div className="absolute bottom-6 right-6">
