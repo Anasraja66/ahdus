@@ -39,7 +39,7 @@ const Contact = () => {
     AOS.refresh();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.email || !formData.subject) {
@@ -51,12 +51,42 @@ const Contact = () => {
       return;
     }
 
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-    });
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message || ''
+          }
+        ]);
 
-    setFormData({ name: "", email: "", subject: "", message: "" });
+      if (error) {
+        toast({
+          title: "Submission Failed",
+          description: "There was an error sending your message. Please try again.",
+          variant: "destructive"
+        });
+        console.error('Error submitting contact form:', error);
+        return;
+      }
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+      });
+
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      toast({
+        title: "Submission Failed",
+        description: "There was an error sending your message. Please try again.",
+        variant: "destructive"
+      });
+      console.error('Error submitting contact form:', error);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
