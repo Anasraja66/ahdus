@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Clock, Facebook, Twitter, Linkedin, ChevronRight, Check, Send, X, Calendar as CalendarIcon, ChevronLeft } from "lucide-react"; // Added ChevronLeft icon
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -65,7 +66,7 @@ const Contact = () => {
     });
   };
 
-  const handleAppointmentBooking = (e: React.FormEvent) => {
+  const handleAppointmentBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedDate || !selectedTime || !appointmentName || !appointmentEmail) {
       toast({
@@ -76,16 +77,48 @@ const Contact = () => {
       return;
     }
 
-    toast({
-      title: "Appointment Booked!",
-      description: `Your appointment for ${selectedDate.toDateString()} at ${selectedTime} has been booked. We'll send a confirmation to ${appointmentEmail}.`,
-    });
+    try {
+      const { error } = await supabase
+        .from('appointments')
+        .insert([
+          {
+            name: appointmentName,
+            email: appointmentEmail,
+            date: selectedDate.toISOString().split('T')[0], // Format as YYYY-MM-DD
+            time: selectedTime,
+            message: `Appointment booked through contact form for ${selectedDate.toDateString()} at ${selectedTime}`,
+            status: 'pending'
+          }
+        ]);
 
-    // Reset appointment form
-    setSelectedDate(null);
-    setSelectedTime(null);
-    setAppointmentName("");
-    setAppointmentEmail("");
+      if (error) {
+        toast({
+          title: "Booking Failed",
+          description: "There was an error booking your appointment. Please try again.",
+          variant: "destructive"
+        });
+        console.error('Error booking appointment:', error);
+        return;
+      }
+
+      toast({
+        title: "Appointment Booked!",
+        description: `Your appointment for ${selectedDate.toDateString()} at ${selectedTime} has been booked. We'll send a confirmation to ${appointmentEmail}.`,
+      });
+
+      // Reset appointment form
+      setSelectedDate(null);
+      setSelectedTime(null);
+      setAppointmentName("");
+      setAppointmentEmail("");
+    } catch (error) {
+      toast({
+        title: "Booking Failed",
+        description: "There was an error booking your appointment. Please try again.",
+        variant: "destructive"
+      });
+      console.error('Error booking appointment:', error);
+    }
   };
 
   const fullAddress = (
