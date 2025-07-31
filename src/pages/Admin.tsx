@@ -12,6 +12,8 @@ import JobManagement from '@/components/admin/JobManagement';
 import TestimonialManagement from '@/components/admin/TestimonialManagement';
 import AppointmentManagement from '@/components/admin/AppointmentManagement';
 import ContactManagement from '@/components/admin/ContactManagement';
+import BlogManagement from '@/components/admin/BlogManagement';
+import NewsManagement from '@/components/admin/NewsManagement';
 
 const Admin = () => {
   const [user, setUser] = useState(null);
@@ -101,7 +103,7 @@ const Admin = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7">
+          <TabsList className="grid w-full grid-cols-9">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="contacts">Contacts</TabsTrigger>
             <TabsTrigger value="appointments">Appointments</TabsTrigger>
@@ -109,6 +111,8 @@ const Admin = () => {
             <TabsTrigger value="team">Team</TabsTrigger>
             <TabsTrigger value="content">Content</TabsTrigger>
             <TabsTrigger value="careers">Careers</TabsTrigger>
+            <TabsTrigger value="blog">Blog</TabsTrigger>
+            <TabsTrigger value="news">News</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
