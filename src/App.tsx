@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Contact from "./pages/Contact";
+import Solutions from "./pages/Solutions";
 import CrossPlatformApps from "./pages/CrossPlatformApps";
 import ShopifyEcommerce from "./pages/ShopifyEcommerce";
 import DevOpsAgile from "./pages/DevOpsAgile";
@@ -31,6 +32,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/solutions" element={<Solutions />} />
           <Route path="/cross-platform-apps" element={<CrossPlatformApps />} />
           <Route path="/shopify-ecommerce" element={<ShopifyEcommerce />} />
           <Route path="/devops-agile" element={<DevOpsAgile />} />

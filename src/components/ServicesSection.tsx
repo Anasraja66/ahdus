@@ -78,27 +78,27 @@ const ServicesSection: React.FC = () => {
         {/* Main Services Grid */}
         <div className="max-w-7xl mx-auto space-y-12" data-aos="fade-up" data-aos-delay="500">
           {/* Row 1 */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-auto lg:h-[480px]" data-aos="fade-up" data-aos-delay="600">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-auto lg:h-[480px]" data-aos="fade-up" data-aos-delay="200">
             {/* What We Build - Large Card */}
             <div 
               className="lg:col-span-2 service-card large-card"
               data-aos="fade-right"
-              data-aos-delay="700"
+              data-aos-delay="300"
             >
               <div className="service-card-inner h-full">
                 <div className="p-6 h-full flex flex-col" data-aos="fade-in" data-aos-delay="800">
-                  <h3 className="service-title-large text-3xl md:text-4xl mb-4 font-extrabold" data-aos="slide-down" data-aos-delay="900" >
+                  <h3 className="service-title-large text-3xl md:text-4xl mb-4 font-extrabold" data-aos="slide-down" data-aos-delay="400" >
                     {services[0].title}
                   </h3>
-                  <div className="flex-1 flex items-center justify-center mb-4 adaptive-image-container" data-aos="zoom-in" data-aos-delay="1000">
+                  <div className="flex-1 flex items-center justify-center mb-4 adaptive-image-container" data-aos="zoom-in" data-aos-delay="500">
                     <img 
                       src={services[0].image}
                       alt={services[0].title}
                       className="adaptive-image max-w-full max-h-36 rounded-lg"
-                      data-aos="float-up" data-aos-delay="1100"
+                      data-aos="float-up" data-aos-delay="600"
                     />
                   </div>
-                  <p className="service-description-large text-lg leading-relaxed text-center" data-aos="fade-up" data-aos-delay="1200">
+                  <p className="service-description-large text-lg leading-relaxed text-center" data-aos="fade-up" data-aos-delay="700">
                     {services[0].description}
                   </p>
                 </div>
@@ -267,7 +267,7 @@ const ServicesSection: React.FC = () => {
                 key={index}
                 className="service-card additional-card"
                 data-aos="fade-up"
-                data-aos-delay={600 + index * 100}
+                data-aos-delay={200 + index * 100}
               >
                 <div className="service-card-inner h-full">
                   <div className="p-5 h-full flex flex-col">
