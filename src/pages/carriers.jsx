@@ -4,13 +4,14 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MapPin, Briefcase, Clock, ArrowRight, Users, Lightbulb, TrendingUp, Code } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const jobListings = [
-];
-
 const Careers = () => {
+  const [jobListings, setJobListings] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -18,7 +19,29 @@ const Careers = () => {
       easing: 'ease-out-cubic',
     });
     AOS.refresh();
+    fetchJobOpenings();
   }, []);
+
+  const fetchJobOpenings = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('job_openings')
+        .select('*')
+        .eq('active', true)
+        .order('display_order', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching job openings:', error);
+        return;
+      }
+
+      setJobListings(data || []);
+    } catch (error) {
+      console.error('Error fetching job openings:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -50,21 +73,24 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* Job Listings Section */}
       <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-display font-bold text-center mb-16" data-aos="fade-up">
             Current <span className="gradient-text">Openings</span>
           </h2>
 
-          {jobListings.length > 0 ? (
+          {loading ? (
+            <div className="text-center py-16">
+              <p className="text-muted-foreground">Loading job openings...</p>
+            </div>
+          ) : jobListings.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {jobListings.map((job, index) => (
                 <Card 
                   key={job.id} 
                   className="p-8 bg-gradient-to-br from-card via-card to-muted/5 border border-border/50 shadow-lg rounded-xl flex flex-col transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:border-primary group relative overflow-hidden"
-                  data-aos={job.aos} 
-                  data-aos-delay={job.aosDelay}
+                  data-aos="fade-up" 
+                  data-aos-delay={index * 100}
                 >
                   {/* Subtle background glow on hover */}
                   <div className="absolute inset-0 bg-gradient-glow opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
@@ -79,9 +105,18 @@ const Careers = () => {
                   <div className="flex items-center text-sm text-muted-foreground mb-2 relative z-10">
                     <MapPin className="w-4 h-4 mr-2" /> {job.location}
                   </div>
-                  <div className="flex items-center text-sm text-muted-foreground mb-6 relative z-10">
-                    <Briefcase className="w-4 h-4 mr-2" /> {job.type}
+                  <div className="flex items-center text-sm text-muted-foreground mb-2 relative z-10">
+                    <Briefcase className="w-4 h-4 mr-2" /> {job.employment_type}
                   </div>
+                  <div className="flex items-center text-sm text-muted-foreground mb-6 relative z-10">
+                    <Users className="w-4 h-4 mr-2" /> {job.department}
+                  </div>
+
+                  {job.salary_range && (
+                    <div className="text-sm font-medium text-primary mb-4 relative z-10">
+                      {job.salary_range}
+                    </div>
+                  )}
 
                   <Button 
                     variant="outline" 
