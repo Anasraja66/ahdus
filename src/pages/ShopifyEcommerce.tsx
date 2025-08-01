@@ -84,7 +84,7 @@ const ShopifyEcommerce = () => {
       <Navigation />
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="py-32 relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
+        <section className="py-32 relative overflow-hidden bg-muted">
           <div className="absolute inset-0 z-0 opacity-10">
             {/* Background pattern for depth */}
             <div className="tech-mesh w-full h-full animate-pulse-light" />
@@ -92,7 +92,7 @@ const ShopifyEcommerce = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center" data-aos="zoom-out-up">
               <h1
-                className="text-5xl md:text-8xl font-display font-extrabold text-white mb-8 leading-tight tracking-tight"
+                className="text-5xl md:text-8xl font-display font-extrabold text-foreground mb-8 leading-tight tracking-tight"
                 data-aos="fade-up"
                 data-aos-delay="200"
               >
@@ -102,7 +102,7 @@ const ShopifyEcommerce = () => {
                 </span>
               </h1>
               <p
-                className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-12 leading-relaxed"
+                className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed"
                 data-aos="fade-up"
                 data-aos-delay="400"
               >
@@ -156,27 +156,27 @@ const ShopifyEcommerce = () => {
                 </Button>
               </div>
               <div className="relative group" data-aos="fade-left" data-aos-offset="200">
-                <div className="glass-card p-8 rounded-3xl shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02]">
-                  <p className="text-lg text-white/90 leading-relaxed italic border-l-4 border-primary pl-4">
+                <div className="bg-card border border-border p-8 rounded-3xl shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02]">
+                  <p className="text-lg text-foreground leading-relaxed italic border-l-4 border-primary pl-4">
                     "In the competitive e-commerce landscape, an exceptional online presence isn't
                     a luxury, it's a necessity. We empower businesses to thrive digitally."
                   </p>
-                  <p className="text-right text-white/70 mt-4">- The Visionary Team</p>
+                  <p className="text-right text-muted-foreground mt-4">- The Visionary Team</p>
                 </div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary-glow rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow" />
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow" />
               </div>
             </div>
           </div>
         </section>
 
         {/* Core Values / Service Principles */}
-        <section className="py-24 bg-gradient-to-b from-gray-900 to-background">
+        <section className="py-24 bg-muted">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16" data-aos="fade-up">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6">
                 Our <span className="gradient-text">Foundational Principles</span>
               </h2>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Every project we undertake is built upon these core values, ensuring unparalleled quality and results.
               </p>
             </div>
@@ -187,19 +187,19 @@ const ShopifyEcommerce = () => {
                 return (
                   <div
                     key={value.title}
-                    className="glass-card-border p-8 rounded-2xl text-center relative overflow-hidden group hover:shadow-primary-lg transition-all duration-300"
+                    className="bg-card border border-border p-8 rounded-2xl text-center relative overflow-hidden group hover:shadow-lg transition-all duration-300"
                     data-aos="flip-up"
                     data-aos-delay={index * 150}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative z-10">
-                      <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6 transform transition-transform duration-500 group-hover:scale-110 group-hover:bg-primary/30">
-                        <Icon className="w-8 h-8 text-primary group-hover:text-primary-glow transition-colors duration-300" />
+                      <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6 transform transition-transform duration-500 group-hover:scale-110">
+                        <Icon className="w-8 h-8 text-primary transition-colors duration-300" />
                       </div>
-                      <h3 className="text-xl font-bold text-white mb-3 group-hover:gradient-text transition-all duration-300">
+                      <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-all duration-300">
                         {value.title}
                       </h3>
-                      <p className="text-white/70 text-sm leading-relaxed">
+                      <p className="text-muted-foreground text-sm leading-relaxed">
                         {value.description}
                       </p>
                     </div>

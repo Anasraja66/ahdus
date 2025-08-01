@@ -268,23 +268,23 @@ const CrossPlatformApps = () => {
                 </div>
               </div>
               <div className="relative group" data-aos="zoom-in" data-aos-duration="1000" data-aos-offset="150">
-                <div className="glass-card rounded-3xl p-8 hover-lift border border-white/20 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] group-hover:rotate-1">
+                <div className="bg-card border border-border rounded-3xl p-8 hover-lift shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] group-hover:rotate-1">
                   <div className="space-y-6">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                    <div className="flex items-center justify-between border-b border-border pb-4 mb-4">
                       <span className="text-sm font-medium text-muted-foreground">Strategic Roadmap</span>
                       <span className="text-primary font-bold flex items-center"><Calendar className="w-4 h-4 mr-1"/> Week 1-2</span>
                     </div>
                     <div className="space-y-4">
-                      <div className="bg-gradient-primary/10 rounded-lg p-4 group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-up" data-aos-delay="100">
-                        <h4 className="font-semibold text-foreground mb-2 group-hover:text-primary-glow transition-colors">Business Workshop</h4>
+                      <div className="bg-muted/50 rounded-lg p-4 group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-up" data-aos-delay="100">
+                        <h4 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">Business Workshop</h4>
                         <p className="text-sm text-muted-foreground">Define goals, KPIs, and success metrics for a clear path.</p>
                       </div>
-                      <div className="bg-gradient-primary/10 rounded-lg p-4 group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-up" data-aos-delay="200">
-                        <h4 className="font-semibold text-foreground mb-2 group-hover:text-primary-glow transition-colors">User Research & UX Strategy</h4>
+                      <div className="bg-muted/50 rounded-lg p-4 group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-up" data-aos-delay="200">
+                        <h4 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">User Research & UX Strategy</h4>
                         <p className="text-sm text-muted-foreground">Understand your audience deeply to design intuitive experiences.</p>
                       </div>
-                      <div className="bg-gradient-primary/10 rounded-lg p-4 group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-up" data-aos-delay="300">
-                        <h4 className="font-semibold text-foreground mb-2 group-hover:text-primary-glow transition-colors">Technical Architecture</h4>
+                      <div className="bg-muted/50 rounded-lg p-4 group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-up" data-aos-delay="300">
+                        <h4 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">Technical Architecture</h4>
                         <p className="text-sm text-muted-foreground">Blueprint a scalable and robust foundation for your app.</p>
                       </div>
                     </div>
@@ -307,26 +307,26 @@ const CrossPlatformApps = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="relative group" data-aos="flip-left" data-aos-duration="1000" data-aos-offset="150">
-                <div className="glass-card rounded-3xl p-8 hover-lift border border-white/20 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] group-hover:-rotate-1">
-                  <h3 className="text-2xl font-bold text-white mb-6">Agile Roadmap: Your Path to Launch</h3>
+                <div className="bg-card border border-border rounded-3xl p-8 hover-lift shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] group-hover:-rotate-1">
+                  <h3 className="text-2xl font-bold text-foreground mb-6">Agile Roadmap: Your Path to Launch</h3>
                   <div className="space-y-6">
                     <div className="flex items-start group" data-aos="fade-right" data-aos-delay="100">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4 mt-1 shadow-md group-hover:scale-110 transition-transform group-hover:bg-primary-glow">
-                        <span className="text-white text-sm font-bold">1</span>
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4 mt-1 shadow-md group-hover:scale-110 transition-transform">
+                        <span className="text-primary-foreground text-sm font-bold">1</span>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-white group-hover:text-primary-glow transition-colors">Core Features Development</h4>
-                        <p className="text-white/70 text-sm">Focus on essential functionality for rapid market entry.</p>
+                        <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">Core Features Development</h4>
+                        <p className="text-muted-foreground text-sm">Focus on essential functionality for rapid market entry.</p>
                         <span className="text-primary text-xs font-semibold">Weeks 3-6</span>
                       </div>
                     </div>
                     <div className="flex items-start group" data-aos="fade-right" data-aos-delay="200">
-                      <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center mr-4 mt-1 shadow-md group-hover:scale-110 transition-transform group-hover:bg-accent-glow">
-                        <span className="text-white text-sm font-bold">2</span>
+                      <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center mr-4 mt-1 shadow-md group-hover:scale-110 transition-transform">
+                        <span className="text-accent-foreground text-sm font-bold">2</span>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-white group-hover:text-accent-glow transition-colors">Rigorous Testing & Polishing</h4>
-                        <p className="text-white/70 text-sm">Ensuring a flawless user experience across all devices.</p>
+                        <h4 className="font-semibold text-foreground group-hover:text-accent transition-colors">Rigorous Testing & Polishing</h4>
+                        <p className="text-muted-foreground text-sm">Ensuring a flawless user experience across all devices.</p>
                         <span className="text-accent text-xs font-semibold">Weeks 7-8</span>
                       </div>
                     </div>
