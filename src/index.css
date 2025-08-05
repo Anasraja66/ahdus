@@ -145,6 +145,40 @@ All colors MUST be HSL.
 }
 
 @layer components {
+  /* Responsive Typography Utilities */
+  .text-responsive-xs { @apply text-xs sm:text-sm; }
+  .text-responsive-sm { @apply text-sm sm:text-base; }
+  .text-responsive-base { @apply text-base sm:text-lg; }
+  .text-responsive-lg { @apply text-lg sm:text-xl; }
+  .text-responsive-xl { @apply text-xl sm:text-2xl; }
+  .text-responsive-2xl { @apply text-2xl sm:text-3xl; }
+  .text-responsive-3xl { @apply text-3xl sm:text-4xl lg:text-5xl; }
+  .text-responsive-4xl { @apply text-4xl sm:text-5xl lg:text-6xl; }
+  
+  /* Responsive Spacing */
+  .spacing-responsive-sm { @apply p-4 sm:p-6 lg:p-8; }
+  .spacing-responsive-md { @apply p-6 sm:p-8 lg:p-12; }
+  .spacing-responsive-lg { @apply p-8 sm:p-12 lg:p-16; }
+  
+  /* Responsive Containers */
+  .container-responsive {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16;
+  }
+  
+  /* Mobile-first Grid Utilities */
+  .grid-responsive-auto {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+  
+  .grid-responsive-equal {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+  
+  /* Touch-friendly Buttons */
+  .btn-touch {
+    @apply min-h-[44px] min-w-[44px] touch-manipulation;
+  }
+
   /* Premium Animations */
   .animate-scroll {
     animation: scroll 30s linear infinite;

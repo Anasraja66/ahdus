@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
+import { v4 as uuidv4 } from 'uuid'; // Import a UUID generator
 
 interface CaseStudy {
   id: string;
@@ -35,6 +36,7 @@ const CaseStudyManagement = () => {
   }, []);
 
   const fetchCaseStudies = async () => {
+    setLoading(true);
     const { data, error } = await supabase
       .from('case_studies')
       .select('*')
@@ -52,70 +54,90 @@ const CaseStudyManagement = () => {
     setLoading(false);
   };
 
-  const handleSave = async (study: Partial<CaseStudy>) => {
-    if (study.id) {
-      // Update existing case study
-      const { error } = await supabase
-        .from('case_studies')
-        .update({
-          title: study.title,
-          category: study.category,
-          industry: study.industry,
-          summary: study.summary,
-          impact: study.impact,
-          content: study.content,
-          icon: study.icon,
-          image: study.image,
-          tags: study.tags?.filter(t => t.trim() !== ''),
-          featured: study.featured,
-          display_order: study.display_order
-        })
-        .eq('id', study.id);
+  const uploadFileToSupabase = async (file: File, bucketName: string) => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${uuidv4()}.${fileExt}`;
+    
+    const { error: uploadError } = await supabase.storage
+      .from(bucketName)
+      .upload(fileName, file, {
+        cacheControl: '3600',
+        upsert: false,
+      });
 
-      if (error) {
-        toast({
-          title: "Error",
-          description: "Failed to update case study",
-          variant: "destructive"
-        });
-      } else {
+    if (uploadError) {
+      throw uploadError;
+    }
+
+    const { data } = supabase.storage.from(bucketName).getPublicUrl(fileName);
+    if (!data?.publicUrl) {
+      throw new Error('Failed to retrieve public URL after upload.');
+    }
+    return data.publicUrl;
+  };
+
+  const handleSave = async (study: Partial<CaseStudy>, imageFile: File | null, iconFile: File | null) => {
+    try {
+      let imageUrl = study.image;
+      let iconUrl = study.icon;
+
+      if (imageFile) {
+        toast({ title: "Uploading image..." });
+        imageUrl = await uploadFileToSupabase(imageFile, 'team-members');
+      }
+
+      if (iconFile) {
+        toast({ title: "Uploading icon..." });
+        iconUrl = await uploadFileToSupabase(iconFile, 'team-members');
+      }
+
+      const caseStudyData = {
+        title: study.title,
+        category: study.category,
+        industry: study.industry,
+        summary: study.summary,
+        impact: study.impact,
+        content: study.content,
+        icon: iconUrl,
+        image: imageUrl,
+        tags: study.tags?.filter(t => t.trim() !== ''),
+        featured: study.featured ?? false,
+        display_order: study.display_order ?? 0
+      };
+
+      if (study.id) {
+        const { error } = await supabase
+          .from('case_studies')
+          .update(caseStudyData)
+          .eq('id', study.id);
+
+        if (error) throw error;
         toast({ title: "Success", description: "Case study updated" });
-        fetchCaseStudies();
-        setEditingStudy(null);
-      }
-    } else {
-      // Add new case study
-      const { error } = await supabase
-        .from('case_studies')
-        .insert({
-          title: study.title,
-          category: study.category,
-          industry: study.industry,
-          summary: study.summary,
-          impact: study.impact,
-          content: study.content,
-          icon: study.icon,
-          image: study.image,
-          tags: study.tags?.filter(t => t.trim() !== ''),
-          featured: study.featured ?? false,
-          display_order: study.display_order || 0
-        });
-
-      if (error) {
-        toast({
-          title: "Error",
-          description: "Failed to add case study",
-          variant: "destructive"
-        });
       } else {
+        const { error } = await supabase
+          .from('case_studies')
+          .insert(caseStudyData);
+
+        if (error) throw error;
         toast({ title: "Success", description: "Case study added" });
-        fetchCaseStudies();
-        setIsAdding(false);
       }
+
+      fetchCaseStudies();
+      setEditingStudy(null);
+      setIsAdding(false);
+    } catch (error: any) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: `Failed to save case study: ${error.message || 'Unknown error'}`,
+        variant: "destructive"
+      });
     }
   };
 
   const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this case study?')) return;
+    
     const { error } = await supabase
       .from('case_studies')
       .delete()
@@ -135,7 +157,7 @@ const CaseStudyManagement = () => {
 
   const CaseStudyForm = ({ study, onSave, onCancel }: {
     study?: CaseStudy;
-    onSave: (study: Partial<CaseStudy>) => void;
+    onSave: (study: Partial<CaseStudy>, imageFile: File | null, iconFile: File | null) => void;
     onCancel: () => void;
   }) => {
     const [formData, setFormData] = useState({
@@ -151,6 +173,24 @@ const CaseStudyManagement = () => {
       featured: study?.featured ?? false,
       display_order: study?.display_order || 0
     });
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const [iconFile, setIconFile] = useState<File | null>(null);
+
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setImageFile(file);
+        setFormData(prev => ({ ...prev, image: URL.createObjectURL(file) }));
+      }
+    };
+
+    const handleIconChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setIconFile(file);
+        setFormData(prev => ({ ...prev, icon: URL.createObjectURL(file) }));
+      }
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -158,11 +198,11 @@ const CaseStudyManagement = () => {
         ...study,
         ...formData,
         tags: formData.tags.split(',').map(s => s.trim()).filter(s => s !== '')
-      });
+      }, imageFile, iconFile);
     };
 
     return (
-      <Card>
+      <Card className="mb-6">
         <CardHeader>
           <CardTitle>{study ? 'Edit Case Study' : 'Add Case Study'}</CardTitle>
         </CardHeader>
@@ -200,22 +240,34 @@ const CaseStudyManagement = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="icon">Icon URL</Label>
+                <Label htmlFor="icon">Icon</Label>
                 <Input
                   id="icon"
-                  value={formData.icon}
-                  onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleIconChange}
                 />
+                {formData.icon && (
+                  <div className="mt-2">
+                    <img src={formData.icon} alt="Icon Preview" className="w-10 h-10 object-cover" />
+                  </div>
+                )}
               </div>
             </div>
 
             <div>
-              <Label htmlFor="image">Image URL</Label>
+              <Label htmlFor="image">Image</Label>
               <Input
                 id="image"
-                value={formData.image}
-                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
               />
+              {formData.image && (
+                <div className="mt-2">
+                  <img src={formData.image} alt="Image Preview" className="max-w-xs h-auto rounded-md" />
+                </div>
+              )}
             </div>
 
             <div>
@@ -308,24 +360,17 @@ const CaseStudyManagement = () => {
           <h2 className="text-2xl font-bold">Case Study Management</h2>
           <p className="text-muted-foreground">Manage case studies and success stories</p>
         </div>
-        <Button onClick={() => setIsAdding(true)}>
+        <Button onClick={() => { setIsAdding(true); setEditingStudy(null); }}>
           <Plus className="h-4 w-4 mr-2" />
           Add Case Study
         </Button>
       </div>
 
-      {isAdding && (
+      {(isAdding || editingStudy) && (
         <CaseStudyForm
+          study={editingStudy || undefined}
           onSave={handleSave}
-          onCancel={() => setIsAdding(false)}
-        />
-      )}
-
-      {editingStudy && (
-        <CaseStudyForm
-          study={editingStudy}
-          onSave={handleSave}
-          onCancel={() => setEditingStudy(null)}
+          onCancel={() => { setIsAdding(false); setEditingStudy(null); }}
         />
       )}
 
@@ -351,7 +396,7 @@ const CaseStudyManagement = () => {
                   <Button
                     size="sm"
                     variant="outline"
-                    onClick={() => setEditingStudy(study)}
+                    onClick={() => { setEditingStudy(study); setIsAdding(false); }}
                   >
                     <Edit className="h-4 w-4" />
                   </Button>

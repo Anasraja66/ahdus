@@ -43,27 +43,26 @@ const Footer = () => {
 
   return (
     // The main container for the footer with dark background in both modes
-    <footer className="bg-gray-900 py-16">
+    <footer className="bg-gray-900 py-8 sm:py-12 lg:py-16">
       {/* This div acts as the "card" with rounded corners and shadow */}
       <div
-        ref={innerContainerRef} // Attach ref to the inner container
-        // Dark background with white text for both light and dark modes
-        className="w-[90%] mx-auto bg-gray-800 rounded-xl shadow-lg px-8 lg:px-16 py-8 transition-transform duration-300 ease-out"
-        style={{ transform: `scale(${scale})`, transformOrigin: 'center center' }} // Apply dynamic scale
+        ref={innerContainerRef}
+        className="w-[95%] sm:w-[90%] mx-auto bg-gray-800 rounded-lg sm:rounded-xl shadow-lg px-4 sm:px-6 lg:px-8 xl:px-16 py-6 sm:py-8 transition-transform duration-300 ease-out"
+        style={{ transform: `scale(${scale})`, transformOrigin: 'center center' }}
       >
-        <div className="grid lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* About Ahdus section */}
-          <div className="lg:col-span-1">
-            <h3 className="text-xl font-bold text-white mb-4">About Ähdus</h3>
-            <p className="text-white/80 leading-relaxed">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">About Ähdus</h3>
+            <p className="text-white/80 leading-relaxed text-sm sm:text-base">
               Ähdus Technology advances the machine elements of digital transformation, developing enterprise software, AI, and ML systems used by millions worldwide.
             </p>
           </div>
 
-          {/* Quick Links - white text for both modes */}
-          <div className="lg:col-span-1">
-            <h3 className="text-xl font-bold text-white mb-4">Quick Links</h3>
-            <ul className="space-y-3">
+          {/* Quick Links */}
+          <div className="sm:col-span-1 lg:col-span-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Quick Links</h3>
+            <ul className="space-y-2 sm:space-y-3">
               {[
                 "Home", "WeAreDevelopers", "Blog", "Career",
                 "Pricing Model", "Contact Us", "Newsroom"
@@ -79,7 +78,7 @@ const Footer = () => {
                       link === "Newsroom" ? "/newsroom" :
                       "#"
                     }
-                    className="text-white/80 hover:text-white transition-colors duration-300"
+                    className="text-white/80 hover:text-white transition-colors duration-300 text-sm sm:text-base block"
                   >
                     {link}
                   </a>
@@ -88,46 +87,46 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info - white text for both modes */}
-          <div className="lg:col-span-1">
-            <h3 className="text-xl font-bold text-white mb-4">Contact Info</h3>
-            <div className="space-y-4">
+          {/* Contact Info */}
+          <div className="sm:col-span-1 lg:col-span-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Contact Info</h3>
+            <div className="space-y-3 sm:space-y-4">
               <div className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                <div className="text-white/80 text-sm">
-                  <div className="mb-2">Office #02 Acantilado Commercial, 49, Phase 7 Bahria Town, Rawalpindi, Islamabad, 46000</div>
-                  <div className="mb-2">Robert-Bosch-Str. 42, 74081, Heilbronn</div>
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-primary mt-0.5 flex-shrink-0" />
+                <div className="text-white/80 text-xs sm:text-sm">
+                  <div className="mb-1 sm:mb-2">Office #02 Acantilado Commercial, 49, Phase 7 Bahria Town, Rawalpindi, Islamabad, 46000</div>
+                  <div className="mb-1 sm:mb-2">Robert-Bosch-Str. 42, 74081, Heilbronn</div>
                   <div>Helsinki, Finland</div>
                 </div>
               </div>
 
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-white/80">+92 333 6979011</span>
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
+                <span className="text-white/80 text-xs sm:text-sm">+92 333 6979011</span>
               </div>
 
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-white/80">info@ahdustechnology.com</span>
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
+                <span className="text-white/80 text-xs sm:text-sm break-all">info@ahdustechnology.com</span>
               </div>
 
               <div className="flex items-center space-x-3">
-                <Clock className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-white/80">Available 24/7</span>
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
+                <span className="text-white/80 text-xs sm:text-sm">Available 24/7</span>
               </div>
             </div>
           </div>
 
-          {/* Affiliations - white text for both modes */}
-          <div className="lg:col-span-1">
-            <h3 className="text-xl font-bold text-white mb-4">Affiliations</h3>
-            <div className="space-y-3">
+          {/* Affiliations */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Affiliations</h3>
+            <div className="space-y-2 sm:space-y-3">
               {[
                 "Campus Founder",
                 "Ionos Agency Partner",
                 "Microsoft Startup Partner"
               ].map((affiliation, index) => (
-                <div key={index} className="text-white/80 hover:text-white transition-colors duration-300 cursor-pointer">
+                <div key={index} className="text-white/80 hover:text-white transition-colors duration-300 cursor-pointer text-sm sm:text-base">
                   {affiliation}
                 </div>
               ))}
@@ -135,13 +134,13 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar - copyright and legal links with white text */}
-        <div className="border-t border-white/20 pt-8 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm">
-            <div className="text-white/80">
+        {/* Bottom Bar - copyright and legal links */}
+        <div className="border-t border-white/20 pt-6 sm:pt-8 mt-6 sm:mt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0 text-xs sm:text-sm">
+            <div className="text-white/80 text-center sm:text-left">
               Copyright © 2021 Ähdus Technology, All Rights Reserved.
             </div>
-            <div className="flex space-x-6">
+            <div className="flex flex-wrap justify-center sm:justify-end space-x-4 sm:space-x-6">
               {["Imprint", "Legal", "Privacy Policy"].map((link, index) => (
                 <a key={index} href="#" className="text-white/80 hover:text-white transition-colors duration-300">
                   {link}

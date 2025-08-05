@@ -96,7 +96,7 @@ const Navigation = () => {
             </div>
 
             <a href="/team-augmentation" className="text-foreground hover:text-primary transition-colors transition-transform duration-200 ease-out hover:scale-105 text-sm font-medium">
-              Team
+              Augmentation
             </a>
             <a href="/about-us" className="text-foreground hover:text-primary transition-colors transition-transform duration-200 ease-out hover:scale-105 text-sm font-medium">
               About

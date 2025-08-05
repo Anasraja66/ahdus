@@ -1,6 +1,5 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
 import { ArrowRight, Zap, ShoppingCart, Cog } from "lucide-react";
 
 const Solutions = () => {
@@ -35,92 +34,64 @@ const Solutions = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      <div className="pt-24 pb-16">
+      <div className="pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16">
         {/* Hero Section */}
-        <div className="container mx-auto px-6 text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold gradient-text mb-6" data-aos="fade-up">
+        <div className="container mx-auto px-4 sm:px-6 text-center mb-12 sm:mb-16">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold gradient-text mb-4 sm:mb-6" data-aos="fade-up">
             Our Solutions
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
             Discover our comprehensive suite of technology solutions designed to accelerate your digital transformation journey.
           </p>
         </div>
 
-        {/* ScrollStack Cards Section */}
-        <div className="container mx-auto px-6">
-          <ScrollStack 
-            className="max-w-4xl mx-auto"
-            itemDistance={120}
-            itemScale={0.95}
-            rotationAmount={2}
-            blurAmount={1}
-          >
+        {/* Solution Cards Section */}
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
             {solutions.map((solution, index) => (
-              <ScrollStackItem key={index} itemClassName="solution-card">
-                <div className={`solution-card-inner ${solution.background}`}>
-                  <div className="p-8 h-full flex flex-col">
-                    {/* Icon and Title */}
-                    <div className="flex items-center mb-6">
-                      <div className="solution-icon mr-4">
-                        {solution.icon}
-                      </div>
-                      <h2 className="text-3xl font-bold text-foreground">
-                        {solution.title}
-                      </h2>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-lg text-muted-foreground mb-8 leading-relaxed flex-1">
-                      {solution.description}
-                    </p>
-
-                    {/* Features */}
-                    <div className="mb-8">
-                      <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-4">
-                        Key Features
-                      </h3>
-                      <div className="grid grid-cols-2 gap-3">
-                        {solution.features.map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-center text-foreground">
-                            <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                            <span className="text-sm">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* CTA Button */}
-                    <div className="mt-auto">
-                      <a
-                        href={solution.href}
-                        className="inline-flex items-center bg-primary hover:bg-primary/80 text-primary-foreground px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105"
-                      >
-                        Learn More
-                        <ArrowRight className="ml-2 w-4 h-4" />
-                      </a>
-                    </div>
+              <div key={index} className="solution-card" data-aos="fade-up" data-aos-delay={index * 150}>
+                <div className="card-header">
+                  <div className="icon-box">
+                    {solution.icon}
                   </div>
+                  <span className="card-title">{solution.title}</span>
                 </div>
-              </ScrollStackItem>
+
+                <div className="card-content">
+                  <p>{solution.description}</p>
+                  
+                  <div className="features-list">
+                    {solution.features.map((feature, featureIndex) => (
+                      <span key={featureIndex} className="feature-tag">
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a href={solution.href} className="btn-link">
+                    Learn More...
+                  </a>
+                </div>
+              </div>
             ))}
-          </ScrollStack>
+          </div>
         </div>
 
         {/* Contact CTA */}
-        <div className="container mx-auto px-6 text-center mt-20">
-          <div className="glass-card rounded-2xl p-8 max-w-2xl mx-auto border border-primary/20">
-            <h2 className="text-3xl font-bold gradient-text mb-4">
+        <div className="container mx-auto px-4 sm:px-6 text-center mt-16 sm:mt-20">
+          <div className="glass-card rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto border border-primary/20">
+            <h2 className="text-2xl sm:text-3xl font-bold gradient-text mb-3 sm:mb-4">
               Ready to Get Started?
             </h2>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
               Let's discuss how our solutions can transform your business and accelerate your growth.
             </p>
             <a
               href="/contact"
-              className="inline-flex items-center bg-gradient-primary hover:opacity-90 text-primary-foreground px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center bg-gradient-primary hover:opacity-90 text-primary-foreground px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 text-sm sm:text-base w-full sm:w-auto justify-center"
             >
               Contact Us Today
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
             </a>
           </div>
         </div>
@@ -130,118 +101,164 @@ const Solutions = () => {
 
       <style>{`
         .solution-card {
-          height: 600px;
-          border-radius: 2rem;
+          width: 100%;
+          max-width: 280px;
+          height: 160px;
+          margin: 0 auto;
+          transition: all 0.5s ease;
+          box-shadow: 15px 15px 30px rgba(25, 25, 25, 0.11),
+                     -15px -15px 30px rgba(60, 60, 60, 0.082);
+          text-align: center;
           overflow: hidden;
-          position: relative;
-          border: 1px solid hsl(var(--border) / 0.3);
+          border-radius: 12px;
+          background: hsl(var(--card));
+          cursor: pointer;
         }
 
-        .solution-card-inner {
-          height: 100%;
-          position: relative;
-          backdrop-filter: blur(20px);
+        .solution-card:hover {
+          height: 380px;
+          background: linear-gradient(360deg, hsl(var(--background)) 60%, hsl(var(--muted)) 70%);
         }
 
-        .solution-card-inner.aurora {
-          background: var(--gradient-primary);
+        .card-header {
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: hsl(var(--primary));
+          margin-bottom: 16px;
+          transition: all 0.5s ease;
         }
 
-        .solution-card-inner.aurora::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(45deg, 
-            hsl(var(--primary) / 0.3) 0%,
-            hsl(var(--primary-glow) / 0.3) 25%,
-            hsl(var(--accent) / 0.3) 50%,
-            hsl(var(--primary) / 0.3) 75%,
-            hsl(var(--primary-glow) / 0.3) 100%
-          );
-          background-size: 400% 400%;
-          animation: aurora-glow 8s ease-in-out infinite;
+        .solution-card:hover .card-header {
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 96%);
         }
 
-        .solution-card-inner.silk {
-          background: var(--gradient-secondary);
+        .icon-box {
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 8px;
         }
 
-        .solution-card-inner.silk::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(45deg,
-            hsl(var(--background) / 0.1) 0%,
-            hsl(var(--background) / 0.05) 50%,
-            hsl(var(--background) / 0.1) 100%
-          );
-          background-size: 200% 200%;
-          animation: silk-shimmer 6s ease-in-out infinite;
+        .icon-box svg {
+          width: 32px;
+          height: 32px;
+          color: hsl(var(--primary-foreground));
         }
 
-        .solution-card-inner.dark-veil {
-          background: var(--gradient-accent);
+        .card-title {
+          font-size: 0.9em;
+          letter-spacing: 0.1em;
+          font-weight: 900;
+          text-transform: uppercase;
+          padding: 4px 0 14px 0;
+          transition: all 0.5s ease;
+          color: hsl(var(--primary-foreground));
+          line-height: 1.2;
         }
 
-        .solution-card-inner.dark-veil::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(circle at 50% 50%,
-            hsl(var(--accent) / 0.2) 0%,
-            hsl(var(--accent) / 0.1) 50%,
-            hsl(var(--accent) / 0.05) 100%
-          );
-          animation: dark-veil-pulse 4s ease-in-out infinite;
+        .solution-card:hover .card-title {
+          padding: 0;
         }
 
-        .solution-icon {
-          background: hsl(var(--background) / 0.2);
-          border-radius: 50%;
-          padding: 1rem;
-          backdrop-filter: blur(10px);
-          border: 1px solid hsl(var(--border) / 0.3);
+        .card-content {
+          display: block;
+          text-align: left;
+          color: hsl(var(--foreground));
+          margin: 0 18px;
+          opacity: 0;
+          transform: translateY(20px);
+          transition: all 0.5s ease 0.1s;
         }
 
-        @keyframes aurora-glow {
-          0%, 100% {
-            background-position: 0% 50%;
-            opacity: 0.8;
-          }
-          50% {
-            background-position: 100% 50%;
-            opacity: 1;
-          }
+        .solution-card:hover .card-content {
+          opacity: 1;
+          transform: translateY(0);
         }
 
-        @keyframes silk-shimmer {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
+        .card-content p {
+          font-size: 0.8em;
+          margin-bottom: 12px;
+          line-height: 1.4;
+          color: hsl(var(--muted-foreground));
         }
 
-        @keyframes dark-veil-pulse {
-          0%, 100% {
-            opacity: 0.6;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.9;
-            transform: scale(1.05);
-          }
+        .features-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-bottom: 16px;
+        }
+
+        .feature-tag {
+          background: hsl(var(--primary) / 0.1);
+          color: hsl(var(--primary));
+          padding: 4px 8px;
+          border-radius: 12px;
+          font-size: 0.7em;
+          font-weight: 600;
+          border: 1px solid hsl(var(--primary) / 0.2);
+        }
+
+        .btn-link {
+          color: hsl(var(--primary));
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 0.8rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          text-decoration: none;
+          display: inline-block;
+          letter-spacing: 0.5px;
+        }
+
+        .btn-link:hover {
+          border-bottom: 2px solid hsl(var(--primary));
+          transform: translateY(-1px);
         }
 
         /* Responsive adjustments */
-        @media (max-width: 768px) {
+        @media (max-width: 640px) {
           .solution-card {
-            height: 500px;
+            max-width: 100%;
+            height: 140px;
           }
           
-          .solution-card-inner .p-8 {
-            padding: 1.5rem;
+          .solution-card:hover {
+            height: 350px;
+          }
+          
+          .card-header {
+            padding: 16px;
+          }
+          
+          .card-title {
+            font-size: 0.8em;
+          }
+          
+          .icon-box {
+            width: 40px;
+            height: 40px;
+          }
+          
+          .icon-box svg {
+            width: 28px;
+            height: 28px;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .solution-card {
+            max-width: 320px;
+            height: 180px;
+          }
+          
+          .solution-card:hover {
+            height: 420px;
           }
         }
       `}</style>

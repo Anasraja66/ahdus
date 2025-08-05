@@ -577,13 +577,16 @@ const WeAreDevelopers = () => {
       <Navigation />
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="py-32 bg-gradient-to-br from-gray-900 to-black-950 relative overflow-hidden animated-hero-background hero-radial-gradient">
+        <section className="py-32 relative overflow-hidden bg-muted">
+          <div className="absolute inset-0 z-0 opacity-10">
+            <div className="tech-mesh w-full h-full animate-pulse-light" />
+          </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center">
-              <h1 className="text-4xl md:text-7xl font-display font-bold text-white mb-8 leading-tight drop-shadow-lg" data-aos="zoom-in" data-aos-duration="1500">
+              <h1 className="text-4xl md:text-7xl font-display font-bold text-foreground mb-8 leading-tight drop-shadow-lg" data-aos="zoom-in" data-aos-duration="1500">
                 <span className="gradient-text">WeAreDevelopers</span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/80 max-w-4xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1200">
+              <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1200">
                 Enabling innovation in enterprise software, machine learning, and digital transformation.
               </p>
               <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
@@ -596,13 +599,11 @@ const WeAreDevelopers = () => {
                 </Button>
               </div>
             </div>
-
-            {/* Floating Elements - more varied sizes and positions, with subtle 3D float */}
-            <div className="absolute top-[10%] left-[5%] w-2 h-2 bg-primary rounded-full animate-float opacity-60" style={{ animationDelay: '0s' }} />
-            <div className="absolute top-[25%] right-[10%] w-1.5 h-1.5 bg-accent rounded-full animate-float opacity-40" style={{ animationDelay: '1s' }} />
-            <div className="absolute bottom-[15%] left-[20%] w-2.5 h-2.5 bg-primary-glow rounded-full animate-float opacity-50" style={{ animationDelay: '2s' }} />
-            <div className="absolute top-[40%] right-[30%] w-3 h-3 bg-accent-glow rounded-full animate-float opacity-70" style={{ animationDelay: '0.5s' }} />
-            <div className="absolute bottom-[5%] right-[5%] w-1 h-1 bg-accent rounded-full animate-float opacity-30" style={{ animationDelay: '2.5s' }} />
+            {/* Floating Elements */}
+            <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-primary rounded-full animate-bounce-slow opacity-70" />
+            <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-accent rounded-full animate-pulse-fast opacity-60" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-1/4 left-1/3 w-4 h-4 bg-primary-glow rounded-full animate-spin-slow opacity-80" style={{ animationDelay: '2s' }} />
+            <div className="absolute top-1/3 right-1/2 w-2.5 h-2.5 bg-secondary rounded-full animate-float-wave opacity-50" style={{ animationDelay: '1.5s' }} />
           </div>
         </section>
 

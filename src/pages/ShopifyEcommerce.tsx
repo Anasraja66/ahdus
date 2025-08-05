@@ -92,17 +92,17 @@ const ShopifyEcommerce = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center" data-aos="zoom-out-up">
               <h1
-                className="text-5xl md:text-8xl font-display font-extrabold text-foreground mb-8 leading-tight tracking-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-display font-extrabold text-foreground mb-8 leading-tight tracking-tight"
                 data-aos="fade-up"
                 data-aos-delay="200"
               >
                 Shopify & E-Commerce
-                <span className="block gradient-text text-7xl md:text-9xl mt-2">
+                <span className="block gradient-text text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl mt-2">
                   Development Solutions
                 </span>
               </h1>
               <p
-                className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed"
+                className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed"
                 data-aos="fade-up"
                 data-aos-delay="400"
               >
@@ -295,13 +295,13 @@ const ShopifyEcommerce = () => {
         </section>
 
         {/* Why Choose Us - Modernized with individual cards */}
-        <section className="py-24 bg-gradient-to-b from-gray-900 to-background">
+        <section className="py-24 bg-muted">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16" data-aos="fade-up">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6">
                 Why Partner with <span className="gradient-text">Us?</span>
               </h2>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Our approach is meticulously crafted to ensure your e-commerce platform excels in every aspect.
               </p>
             </div>
@@ -358,10 +358,10 @@ const ShopifyEcommerce = () => {
                       <div className="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mb-6 transform transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110">
                         <Icon className="w-8 h-8 text-primary group-hover:text-primary-glow transition-colors duration-300" />
                       </div>
-                      <h3 className="text-2xl font-bold text-white mb-4">
+                      <h3 className="text-2xl font-bold text-foreground mb-4">
                         {item.title}
                       </h3>
-                      <p className="text-white/70 leading-relaxed text-sm">
+                      <p className="text-muted-foreground leading-relaxed text-sm">
                         {item.content}
                       </p>
                     </div>
@@ -373,17 +373,17 @@ const ShopifyEcommerce = () => {
         </section>
 
         {/* Mobile App Development - Feature-rich card layout */}
-        <section className="py-24 tech-mesh relative overflow-hidden">
+        <section className="py-24 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div data-aos="fade-right" data-aos-offset="200">
                 <div className="inline-flex p-4 rounded-2xl bg-gradient-primary mb-8 shadow-lg">
                   <Smartphone className="w-8 h-8 text-white" />
                 </div>
-                <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6 leading-tight">
+                <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6 leading-tight">
                   Unleash Your Store with <span className="gradient-text">Native Mobile Apps</span>
                 </h2>
-                <p className="text-xl text-white/80 leading-relaxed mb-8">
+                <p className="text-xl text-muted-foreground leading-relaxed mb-8">
                   Go beyond the browser. We build lightning-fast, intuitive React Native apps
                   for both iOS and Android, ensuring your customers have a seamless, engaging
                   shopping experience on the go.
@@ -399,7 +399,7 @@ const ShopifyEcommerce = () => {
                   ].map((feature, index) => (
                     <div
                       key={feature}
-                      className="flex items-center text-white bg-white/10 p-3 rounded-lg shadow-sm"
+                      className="flex items-center text-foreground bg-muted/50 p-3 rounded-lg shadow-sm"
                       data-aos="fade-up"
                       data-aos-delay={index * 50}
                     >
@@ -409,37 +409,37 @@ const ShopifyEcommerce = () => {
                   ))}
                 </div>
               </div>
-              <div className="relative p-8 rounded-3xl shadow-xl bg-gradient-to-br from-gray-800 to-gray-900 transform rotate-3 scale-105 group hover:rotate-0 hover:scale-100 transition-all duration-700 ease-out" data-aos="zoom-in" data-aos-offset="200">
+              <div className="relative p-8 rounded-3xl shadow-xl bg-card border border-border transform rotate-3 scale-105 group hover:rotate-0 hover:scale-100 transition-all duration-700 ease-out" data-aos="zoom-in" data-aos-offset="200">
                 <div className="glass-card rounded-2xl p-6 relative z-10">
                   <div className="space-y-6">
-                    <div className="flex items-center justify-between border-b border-white/20 pb-4">
-                      <span className="text-base font-medium text-white/70">App Features Overview</span>
+                    <div className="flex items-center justify-between border-b border-border pb-4">
+                      <span className="text-base font-medium text-muted-foreground">App Features Overview</span>
                       <span className="text-primary font-bold bg-primary/10 px-3 py-1 rounded-full text-sm">Cross-Platform</span>
                     </div>
                     <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                      <div className="bg-white/10 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
+                      <div className="bg-muted/50 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
                         <TrendingUp className="w-8 h-8 text-primary mx-auto mb-2" />
-                        <span className="text-white text-sm font-medium">Advanced Analytics</span>
+                        <span className="text-foreground text-sm font-medium">Advanced Analytics</span>
                       </div>
-                      <div className="bg-white/10 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
+                      <div className="bg-muted/50 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
                         <Users className="w-8 h-8 text-accent mx-auto mb-2" />
-                        <span className="text-white text-sm font-medium">Personalized Profiles</span>
+                        <span className="text-foreground text-sm font-medium">Personalized Profiles</span>
                       </div>
-                      <div className="bg-white/10 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
+                      <div className="bg-muted/50 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
                         <ShoppingCart className="w-8 h-8 text-primary-glow mx-auto mb-2" />
-                        <span className="text-white text-sm font-medium">Seamless Checkout</span>
+                        <span className="text-foreground text-sm font-medium">Seamless Checkout</span>
                       </div>
-                      <div className="bg-white/10 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
+                      <div className="bg-muted/50 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
                         <Zap className="w-8 h-8 text-accent mx-auto mb-2" />
-                        <span className="text-white text-sm font-medium">Real-time Updates</span>
+                        <span className="text-foreground text-sm font-medium">Real-time Updates</span>
                       </div>
-                      <div className="bg-white/10 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
+                      <div className="bg-muted/50 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
                         <Cloud className="w-8 h-8 text-blue-400 mx-auto mb-2" />
-                        <span className="text-white text-sm font-medium">Cloud Sync</span>
+                        <span className="text-foreground text-sm font-medium">Cloud Sync</span>
                       </div>
-                      <div className="bg-white/10 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
+                      <div className="bg-muted/50 rounded-lg p-4 text-center transform transition-transform duration-300 hover:scale-105">
                         <Target className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                        <span className="text-white text-sm font-medium">Marketing Integrations</span>
+                        <span className="text-foreground text-sm font-medium">Marketing Integrations</span>
                       </div>
                     </div>
                   </div>
@@ -498,7 +498,7 @@ const ShopifyEcommerce = () => {
         </section>
 
         {/* Development Philosophy - Spotlight Quote */}
-        <section className="py-24 tech-mesh relative overflow-hidden">
+        <section className="py-24 bg-muted relative overflow-hidden">
           <div className="absolute inset-0 z-0 opacity-10">
             <div className="tech-mesh w-full h-full animate-pulse-light reverse" />
           </div>
@@ -508,14 +508,14 @@ const ShopifyEcommerce = () => {
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 to-transparent opacity-30" />
                 <div className="relative z-10">
                   <div className="text-7xl font-bold gradient-text mb-6">"</div>
-                  <blockquote className="text-2xl md:text-4xl font-medium text-white leading-relaxed mb-8 italic">
+                  <blockquote className="text-2xl md:text-4xl font-medium text-foreground leading-relaxed mb-8 italic">
                     "We champion the MVP approach: build lean, iterate swiftly with feedback,
                     then scale strategically—all underpinned by TDD, SOLID, and CQRS principles
                     for rock-solid, future-proof development."
                   </blockquote>
-                  <div className="text-white/80 border-t border-white/20 pt-4 mt-4">
+                  <div className="text-muted-foreground border-t border-border pt-4 mt-4">
                     <div className="font-semibold text-lg">Our Agile Development Philosophy</div>
-                    <div className="text-base text-white/60 mt-1">
+                    <div className="text-base text-muted-foreground mt-1">
                       Agile-first • Test-Driven • Scalable Architecture
                     </div>
                   </div>
@@ -560,7 +560,7 @@ const ShopifyEcommerce = () => {
                       </div>
                       <div className="space-y-3">
                         {stack.techs.map((tech) => (
-                          <div key={tech} className="flex items-center text-white/80">
+                          <div key={tech} className="flex items-center text-muted-foreground">
                             <div className="w-2.5 h-2.5 bg-primary rounded-full mr-3 flex-shrink-0" />
                             <span className="text-sm">{tech}</span>
                           </div>
@@ -575,28 +575,32 @@ const ShopifyEcommerce = () => {
         </section>
 
         {/* CTA Footer - Refined Call to Action */}
-        <section className="py-24 bg-gradient-to-r from-primary-dark to-primary-light relative overflow-hidden">
-          <div className="absolute inset-0 z-0 opacity-10">
-            <div className="tech-mesh w-full h-full animate-pulse-light" />
-          </div>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <h2 className="text-3xl md:text-6xl font-display font-extrabold text-white mb-8 leading-tight" data-aos="fade-up" data-aos-delay="100">
-              Ready to redefine your <span className="block gradient-text">e-commerce success?</span>
-            </h2>
-            <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="300">
-              Let's connect and craft a bespoke e-commerce strategy that drives growth,
-              engagement, and unparalleled results for your business.
-            </p>
-            <div data-aos="zoom-in" data-aos-delay="500">
-              <Button
-                size="xl"
-                className="bg-white text-gray-900 text-lg px-10 py-5 rounded-full shadow-lg hover:scale-105 hover:bg-gray-100 transition-all duration-300 transform-gpu font-semibold"
-                asChild
-              >
-                <a href="/contact">
-                  Schedule Your Free Consultation <ArrowRight className="ml-3 w-6 h-6" />
-                </a>
-              </Button>
+        <section className="py-24 bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-card border border-border rounded-3xl p-12 shadow-2xl text-center relative overflow-hidden">
+              <div className="absolute inset-0 z-0 opacity-5">
+                <div className="tech-mesh w-full h-full animate-pulse-light" />
+              </div>
+              <div className="relative z-10">
+                <h2 className="text-3xl md:text-6xl font-display font-extrabold text-foreground mb-8 leading-tight" data-aos="fade-up" data-aos-delay="100">
+                  Ready to redefine your <span className="block gradient-text">e-commerce success?</span>
+                </h2>
+                <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="300">
+                  Let's connect and craft a bespoke e-commerce strategy that drives growth,
+                  engagement, and unparalleled results for your business.
+                </p>
+                <div data-aos="zoom-in" data-aos-delay="500">
+                  <Button
+                    size="xl"
+                    className="bg-gradient-primary text-white text-lg px-10 py-5 rounded-full shadow-lg hover:scale-105 transition-all duration-300 transform-gpu font-semibold"
+                    asChild
+                  >
+                    <a href="/contact">
+                      Schedule Your Free Consultation <ArrowRight className="ml-3 w-6 h-6" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -206,12 +206,12 @@ const CrossPlatformApps = () => {
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center" data-aos="fade-up" data-aos-duration="1000">
-              <h1 className="text-5xl md:text-8xl font-display font-extrabold text-foreground mb-8 leading-tight drop-shadow-lg" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1200">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-display font-extrabold text-foreground mb-8 leading-tight drop-shadow-lg" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1200">
                 Cross-Platform App
-                <span className="block gradient-text relative z-10 text-7xl md:text-9xl mt-2">Development Done Right</span>
+                <span className="block gradient-text relative z-10 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl mt-2">Development Done Right</span>
               </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1200">
-                **Launch everywhere, faster.** Build once, deploy seamlessly across Android, iOS, and beyond.
+              <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1200">
+                <span className="font-bold text-primary" data-aos="zoom-in-right" data-aos-delay="600" data-aos-duration="800">Launch everywhere, faster.</span> Build once, deploy seamlessly across Android, iOS, and beyond.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="1000">
                 <Button size="xl" className="bg-primary hover:bg-primary/80 text-primary-foreground font-semibold shadow-premium hover:scale-105 transition-all duration-300 transform-gpu rounded-full px-8 py-4 text-lg" asChild>
@@ -250,7 +250,7 @@ const CrossPlatformApps = () => {
                   Your Vision, Our <span className="gradient-text">Strategic Blueprint</span>
                 </h2>
                 <p className="text-xl text-muted-foreground leading-relaxed mb-8" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                  **We don't just build apps; we build businesses.** Our in-depth discovery process aligns technology with your market needs and user desires, ensuring every line of code serves your core objectives.
+                  <span className="font-bold text-primary" data-aos="flip-left" data-aos-delay="700" data-aos-duration="1000">We don't just build apps; we build businesses.</span> Our in-depth discovery process aligns technology with your market needs and user desires, ensuring every line of code serves your core objectives.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-center text-foreground group" data-aos="fade-right" data-aos-delay="500" data-aos-duration="800">
@@ -332,12 +332,12 @@ const CrossPlatformApps = () => {
                     </div>
                     <div className="flex items-start group" data-aos="fade-right" data-aos-delay="300">
                       <div className="w-8 h-8 bg-primary-glow rounded-full flex items-center justify-center mr-4 mt-1 shadow-md group-hover:scale-110 transition-transform group-hover:bg-secondary">
-                        <span className="text-white text-sm font-bold">3</span>
+                        <span className="text-foreground text-sm font-bold">3</span>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-white group-hover:text-primary-glow transition-colors">Strategic Launch & Iteration</h4>
-                        <p className="text-white/70 text-sm">Deploy, gather user insights, and continuously improve.</p>
-                        <span className="text-primary-glow text-xs font-semibold">Week 9+</span>
+                        <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">Strategic Launch & Iteration</h4>
+                        <p className="text-muted-foreground text-sm">Deploy, gather user insights, and continuously improve.</p>
+                        <span className="text-primary text-xs font-semibold">Week 9+</span>
                       </div>
                     </div>
                   </div>
@@ -347,22 +347,22 @@ const CrossPlatformApps = () => {
                 <div className="inline-flex p-4 rounded-2xl bg-gradient-accent mb-8 shadow-xl" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="800">
                   <Target className="w-8 h-8 text-white" />
                 </div>
-                <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
                   Rapid Validation with <span className="gradient-text">Lean MVP Strategy</span>
                 </h2>
-                <p className="text-xl text-white/80 leading-relaxed mb-8" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                  Our proven MVP approach minimizes risk and maximizes learning. We deliver essential features quickly, allowing you to **validate your idea with real users** and pivot efficiently.
+                <p className="text-xl text-foreground leading-relaxed mb-8" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                  Our proven MVP approach minimizes risk and maximizes learning. We deliver essential features quickly, allowing you to <span className="font-bold text-primary" data-aos="zoom-in-up" data-aos-delay="800" data-aos-duration="900">validate your idea with real users</span> and pivot efficiently.
                 </p>
                 <div className="space-y-4">
-                  <div className="flex items-center text-white group" data-aos="fade-left" data-aos-delay="500" data-aos-duration="800">
+                  <div className="flex items-center text-foreground group" data-aos="fade-left" data-aos-delay="500" data-aos-duration="800">
                     <CheckCircle className="w-5 h-5 text-primary mr-3 group-hover:scale-110 transition-transform" />
                     <span className="group-hover:text-primary transition-colors">MoSCoW method for precise feature prioritization</span>
                   </div>
-                  <div className="flex items-center text-white group" data-aos="fade-left" data-aos-delay="600" data-aos-duration="800">
+                  <div className="flex items-center text-foreground group" data-aos="fade-left" data-aos-delay="600" data-aos-duration="800">
                     <CheckCircle className="w-5 h-5 text-primary mr-3 group-hover:scale-110 transition-transform" />
                     <span className="group-hover:text-primary transition-colors">Transparent cost estimation & agile timeline planning</span>
                   </div>
-                  <div className="flex items-center text-white group" data-aos="fade-left" data-aos-delay="700" data-aos-duration="800">
+                  <div className="flex items-center text-foreground group" data-aos="fade-left" data-aos-delay="700" data-aos-duration="800">
                     <CheckCircle className="w-5 h-5 text-primary mr-3 group-hover:scale-110 transition-transform" />
                     <span className="group-hover:text-primary transition-colors">Iterative releases with continuous user feedback integration</span>
                   </div>
@@ -383,22 +383,22 @@ const CrossPlatformApps = () => {
                 Reach Every User: <span className="gradient-text">Android, iOS & Beyond</span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                Our cross-platform expertise allows you to target a broader audience with a **single, efficient codebase.** This means faster development, lower costs, and seamless performance everywhere.
+                Our cross-platform expertise allows you to target a broader audience with a <span className="font-bold text-primary" data-aos="slide-left" data-aos-delay="700" data-aos-duration="1000">single, efficient codebase.</span> This means faster development, lower costs, and seamless performance everywhere.
               </p>
             </div>
 
             {/* Interactive Platform Toggle */}
             <div className="flex justify-center mb-12" data-aos="fade-up" data-aos-delay="500">
-              <div className="inline-flex rounded-full border border-primary-glow/20 bg-card p-1 shadow-inner">
+              <div className="inline-flex flex-col sm:flex-row rounded-2xl sm:rounded-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-1 shadow-lg border border-gray-200 dark:border-gray-700 gap-1 sm:gap-0 w-full max-w-xs sm:max-w-none sm:w-auto">
                 <Button
                   onClick={() => setSelectedPlatformType('cross-platform')}
-                  className={`rounded-full px-6 py-2 text-lg font-semibold transition-all duration-300 ${selectedPlatformType === 'cross-platform' ? 'bg-gradient-primary text-white shadow-lg' : 'bg-transparent text-muted-foreground hover:bg-white/5'}`}
+                  className={`rounded-xl sm:rounded-full px-6 py-3 text-base sm:text-lg font-semibold transition-all duration-300 w-full sm:w-auto ${selectedPlatformType === 'cross-platform' ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg transform scale-105' : 'bg-transparent text-gray-600 dark:text-gray-300 hover:bg-white/80 dark:hover:bg-gray-700/50 hover:text-gray-800 dark:hover:text-white'}`}
                 >
                   Cross-Platform
                 </Button>
                 <Button
                   onClick={() => setSelectedPlatformType('native')}
-                  className={`rounded-full px-6 py-2 text-lg font-semibold transition-all duration-300 ${selectedPlatformType === 'native' ? 'bg-gradient-primary text-white shadow-lg' : 'bg-transparent text-muted-foreground hover:bg-white/5'}`}
+                  className={`rounded-xl sm:rounded-full px-6 py-3 text-base sm:text-lg font-semibold transition-all duration-300 w-full sm:w-auto ${selectedPlatformType === 'native' ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg transform scale-105' : 'bg-transparent text-gray-600 dark:text-gray-300 hover:bg-white/80 dark:hover:bg-gray-700/50 hover:text-gray-800 dark:hover:text-white'}`}
                 >
                   Native (iOS/Android)
                 </Button>
@@ -481,26 +481,26 @@ const CrossPlatformApps = () => {
                 <div className="inline-flex p-4 rounded-2xl bg-gradient-accent mb-8 shadow-xl" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="800">
                   <Rocket className="w-8 h-8 text-white" />
                 </div>
-                <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
                   Unleash Innovation with <span className="gradient-text">Agile & DevOps</span>
                 </h2>
-                <p className="text-xl text-white/80 leading-relaxed mb-8" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                  Our iterative, **2-week release cycles** and robust CI/CD pipelines mean you get working software faster, with real-time transparency and continuous quality assurance.
+                <p className="text-xl text-foreground leading-relaxed mb-8" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                  Our iterative, <span className="font-bold text-primary" data-aos="flip-right" data-aos-delay="750" data-aos-duration="1200">2-week release cycles</span> and robust CI/CD pipelines mean you get working software faster, with real-time transparency and continuous quality assurance.
                 </p>
                 <div className="space-y-4">
-                  <div className="flex items-center text-white group" data-aos="fade-right" data-aos-delay="500" data-aos-duration="800">
+                  <div className="flex items-center text-foreground group" data-aos="fade-right" data-aos-delay="500" data-aos-duration="800">
                     <CheckCircle className="w-5 h-5 text-primary mr-3 group-hover:scale-110 transition-transform" />
                     <span className="group-hover:text-primary transition-colors">Continuous Integration with Azure DevOps & Jenkins</span>
                   </div>
-                  <div className="flex items-center text-white group" data-aos="fade-right" data-aos-delay="600" data-aos-duration="800">
+                  <div className="flex items-center text-foreground group" data-aos="fade-right" data-aos-delay="600" data-aos-duration="800">
                     <CheckCircle className="w-5 h-5 text-primary mr-3 group-hover:scale-110 transition-transform" />
                     <span className="group-hover:text-primary transition-colors">Automated testing for unparalleled reliability</span>
                   </div>
-                  <div className="flex items-center text-white group" data-aos="fade-right" data-aos-delay="700" data-aos-duration="800">
+                  <div className="flex items-center text-foreground group" data-aos="fade-right" data-aos-delay="700" data-aos-duration="800">
                     <CheckCircle className="w-5 h-5 text-primary mr-3 group-hover:scale-110 transition-transform" />
                     <span className="group-hover:text-primary transition-colors">Git-based version control for seamless collaboration</span>
                   </div>
-                  <div className="flex items-center text-white group" data-aos="fade-right" data-aos-delay="800" data-aos-duration="800">
+                  <div className="flex items-center text-foreground group" data-aos="fade-right" data-aos-delay="800" data-aos-duration="800">
                     <CheckCircle className="w-5 h-5 text-primary mr-3 group-hover:scale-110 transition-transform" />
                     <span className="group-hover:text-primary transition-colors">Real-time project tracking and transparent communication</span>
                   </div>
@@ -508,33 +508,33 @@ const CrossPlatformApps = () => {
               </div>
               <div className="relative group" data-aos="flip-right" data-aos-duration="1000" data-aos-offset="150">
                 <div className="glass-card rounded-3xl p-8 hover-lift border border-white/20 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] group-hover:rotate-1">
-                  <h3 className="text-2xl font-bold text-white mb-6">Optimized Development Pipeline</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-6">Optimized Development Pipeline</h3>
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 bg-white/10 rounded-lg group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-left" data-aos-delay="100">
+                    <div className="flex items-center justify-between p-4 bg-gray-100/80 dark:bg-white/10 rounded-lg group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-left" data-aos-delay="100">
                       <div className="flex items-center">
                         <div className="w-3 h-3 bg-green-400 rounded-full mr-3 group-hover:scale-125 transition-transform"></div>
-                        <span className="text-white font-medium group-hover:text-green-400 transition-colors">Code Development</span>
+                        <span className="text-foreground font-medium group-hover:text-green-400 transition-colors">Code Development</span>
                       </div>
                       <span className="text-green-400 text-sm font-bold">Active</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-white/10 rounded-lg group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-left" data-aos-delay="200">
+                    <div className="flex items-center justify-between p-4 bg-gray-100/80 dark:bg-white/10 rounded-lg group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-left" data-aos-delay="200">
                       <div className="flex items-center">
                         <div className="w-3 h-3 bg-blue-400 rounded-full mr-3 group-hover:scale-125 transition-transform"></div>
-                        <span className="text-white font-medium group-hover:text-blue-400 transition-colors">Automated Testing</span>
+                        <span className="text-foreground font-medium group-hover:text-blue-400 transition-colors">Automated Testing</span>
                       </div>
                       <span className="text-blue-400 text-sm font-bold">Running</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-white/10 rounded-lg group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-left" data-aos-delay="300">
+                    <div className="flex items-center justify-between p-4 bg-gray-100/80 dark:bg-white/10 rounded-lg group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-left" data-aos-delay="300">
                       <div className="flex items-center">
                         <div className="w-3 h-3 bg-yellow-400 rounded-full mr-3 group-hover:scale-125 transition-transform"></div>
-                        <span className="text-white font-medium group-hover:text-yellow-400 transition-colors">Build & Deploy</span>
+                        <span className="text-foreground font-medium group-hover:text-yellow-400 transition-colors">Build & Deploy</span>
                       </div>
                       <span className="text-yellow-400 text-sm font-bold">Queued</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-white/10 rounded-lg group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-left" data-aos-delay="400">
+                    <div className="flex items-center justify-between p-4 bg-gray-100/80 dark:bg-white/10 rounded-lg group transform transition-transform duration-300 hover:scale-[1.03]" data-aos="fade-left" data-aos-delay="400">
                       <div className="flex items-center">
                         <div className="w-3 h-3 bg-purple-400 rounded-full mr-3 group-hover:scale-125 transition-transform"></div>
-                        <span className="text-white font-medium group-hover:text-purple-400 transition-colors">User Feedback</span>
+                        <span className="text-foreground font-medium group-hover:text-purple-400 transition-colors">User Feedback</span>
                       </div>
                       <span className="text-purple-400 text-sm font-bold">Pending</span>
                     </div>
@@ -556,7 +556,7 @@ const CrossPlatformApps = () => {
                 Post-Launch Peace of Mind: <span className="gradient-text">Your Success is Ours</span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                Launch with absolute confidence. We provide **2 months of dedicated post-launch support** at no extra cost, ensuring your app performs flawlessly and continuously evolves.
+                Launch with absolute confidence. We provide <span className="font-bold text-primary" data-aos="zoom-in-left" data-aos-delay="800" data-aos-duration="1100">2 months of dedicated post-launch support</span> at no extra cost, ensuring your app performs flawlessly and continuously evolves.
               </p>
             </div>
 
@@ -612,10 +612,10 @@ const CrossPlatformApps = () => {
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center" data-aos="fade-up" data-aos-duration="1000">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6" data-aos="fade-up" data-aos-delay="200">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6" data-aos="fade-up" data-aos-delay="200">
                 Ready to Transform Your Idea Into <span className="gradient-text">a Powerful App?</span>
               </h2>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="400">
+              <p className="text-xl text-foreground max-w-3xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="400">
                 Let's discuss your project and craft a detailed roadmap to digital success.
               </p>
               <Button size="xl" className="bg-gradient-primary text-white font-semibold shadow-lg hover:shadow-primary-glow/50 hover:scale-105 transition-all duration-300 transform-gpu rounded-full px-8 py-4 text-lg" asChild data-aos="zoom-in" data-aos-delay="600">

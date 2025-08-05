@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Users,
   Globe,
@@ -418,15 +419,28 @@ const TeamAugmentation = () => {
       <ScrollProgressBar /> {/* Added Scroll Progress Bar */}
       <Navigation />
       <div className="pt-16">
-        {/* Hero Section */}
-        <section className="py-32 bg-gradient-to-br from-gray-900 to-black-950 relative overflow-hidden animated-hero-background hero-radial-gradient">
+        {/* Hero Section with lighter, theme-aware background and card */}
+        <section className="py-32 relative overflow-hidden">
+          {/* Lighter, theme-aware background gradients */}
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/60 to-muted/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-secondary/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-accent/10 to-primary/5"></div>
+          {/* Subtle animated orbs, very light */}
+          <div className="absolute top-[10%] left-[5%] w-32 h-32 bg-primary/5 rounded-full blur-3xl animate-float opacity-30" style={{ animationDelay: '0s' }} />
+          <div className="absolute top-[25%] right-[10%] w-24 h-24 bg-accent/5 rounded-full blur-3xl animate-float opacity-30" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-[15%] left-[20%] w-28 h-28 bg-primary-glow/10 rounded-full blur-3xl animate-float opacity-20" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-[40%] right-[30%] w-36 h-36 bg-accent-glow/10 rounded-full blur-3xl animate-float opacity-20" style={{ animationDelay: '0.5s' }} />
+          <div className="absolute bottom-[5%] right-[5%] w-16 h-16 bg-accent/10 rounded-full blur-3xl animate-float opacity-10" style={{ animationDelay: '2.5s' }} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center">
-              <h1 className="text-4xl md:text-7xl font-display font-bold text-white mb-8 leading-tight drop-shadow-lg" data-aos="zoom-in" data-aos-duration="1500">
+              <h1 className="text-4xl md:text-7xl font-display font-bold text-foreground mb-8 leading-tight drop-shadow-lg" data-aos="zoom-in" data-aos-duration="1500">
                 IT Staff Augmentation
                 <span className="block gradient-text">Services</span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/80 max-w-4xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1200">
+              {/* Card for company impact statement */}
+              <div className="mb-10 flex justify-center">
+              </div>
+              <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1200">
                 Scale your team with top-tier tech talent—fast, flexible, and on demand.
               </p>
               <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
@@ -438,36 +452,19 @@ const TeamAugmentation = () => {
                 </Button>
               </div>
             </div>
-
-            {/* Floating Elements - more varied sizes and positions, with subtle 3D float */}
-            <div className="absolute top-[10%] left-[5%] w-2 h-2 bg-primary rounded-full animate-float opacity-60" style={{ animationDelay: '0s' }} />
-            <div className="absolute top-[25%] right-[10%] w-1.5 h-1.5 bg-accent rounded-full animate-float opacity-40" style={{ animationDelay: '1s' }} />
-            <div className="absolute bottom-[15%] left-[20%] w-2.5 h-2.5 bg-primary-glow rounded-full animate-float opacity-50" style={{ animationDelay: '2s' }} />
-            <div className="absolute top-[40%] right-[30%] w-3 h-3 bg-accent-glow rounded-full animate-float opacity-70" style={{ animationDelay: '0.5s' }} />
-            <div className="absolute bottom-[5%] right-[5%] w-1 h-1 bg-accent rounded-full animate-float opacity-30" style={{ animationDelay: '2.5s' }} />
           </div>
         </section>
 
-        {/* Introduction */}
-        <section className="py-24 bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed" data-aos="fade-up" data-aos-duration="1000">
-                Since 2021, Ähdus Technology has helped businesses scale efficiently by filling tech talent gaps
-                with skilled professionals across AI, Web, Cloud, and DevOps.
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Introduction removed (moved to hero card) */}
 
         {/* Engagement Models */}
-        <section className="py-24 bg-black-900">
+        <section className="py-24 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6" data-aos="fade-up" data-aos-duration="1000">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6" data-aos="fade-up" data-aos-duration="1000">
                 Engagement <span className="gradient-text">Models</span>
               </h2>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                 Choose the model that best fits your business needs and project requirements.
               </p>
             </div>
@@ -478,7 +475,7 @@ const TeamAugmentation = () => {
                 return (
                   <div
                     key={model.title}
-                    className="glass-card rounded-2xl p-8 hover-lift border border-white/10 group"
+                    className="glass-card rounded-2xl p-8 hover-lift border border-border group"
                     data-aos="card-reveal" // Custom AOS animation
                     data-aos-delay={index * 150}
                     data-aos-duration="1000"
@@ -486,15 +483,15 @@ const TeamAugmentation = () => {
                     <div className="inline-flex p-4 rounded-2xl bg-gradient-primary mb-6 shadow-md group-hover:scale-110 transition-all duration-500">
                       <Icon className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:gradient-text transition-all duration-300">
+                    <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:gradient-text transition-all duration-300">
                       {model.title}
                     </h3>
-                    <p className="text-white/70 mb-6 leading-relaxed">
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
                       {model.description}
                     </p>
                     <div className="space-y-2">
                       {model.benefits.map((benefit, bIndex) => (
-                        <div key={bIndex} className="flex items-center text-white/80">
+                        <div key={bIndex} className="flex items-center text-muted-foreground">
                           <CheckCircle className="w-4 h-4 text-primary mr-3" />
                           <span className="text-sm">{benefit}</span>
                         </div>
@@ -525,7 +522,7 @@ const TeamAugmentation = () => {
                 return (
                   <div
                     key={point.title}
-                    className="glass-card rounded-2xl p-8 text-center hover-lift border border-white/10 group"
+                    className="glass-card rounded-2xl p-8 text-center hover-lift border border-border group"
                     data-aos="card-reveal" // Custom AOS animation
                     data-aos-delay={index * 150}
                     data-aos-duration="1000"
@@ -546,13 +543,13 @@ const TeamAugmentation = () => {
         </section>
 
         {/* What You'll Get */}
-        <section className="py-24 bg-black-900">
+        <section className="py-24 bg-muted">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6" data-aos="fade-up" data-aos-duration="1000">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6" data-aos="fade-up" data-aos-duration="1000">
                 What You&apos;ll <span className="gradient-text">Get</span>
               </h2>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                 Experience the benefits of working with our carefully vetted and highly skilled professionals.
               </p>
             </div>
@@ -563,7 +560,7 @@ const TeamAugmentation = () => {
                 return (
                   <div
                     key={benefit.title}
-                    className="glass-card rounded-2xl p-8 hover-lift border border-white/10 group"
+                    className="glass-card rounded-2xl p-8 hover-lift border border-border group"
                     data-aos="card-reveal" // Custom AOS animation
                     data-aos-delay={index * 150}
                     data-aos-duration="1000"
@@ -574,10 +571,10 @@ const TeamAugmentation = () => {
                       </div>
                       <span className="text-3xl font-bold gradient-text">{index + 1}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-4 group-hover:gradient-text transition-all duration-300">
+                    <h3 className="text-xl font-bold text-foreground mb-4 group-hover:gradient-text transition-all duration-300">
                       {benefit.title}
                     </h3>
-                    <p className="text-white/70 leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed">
                       {benefit.description}
                     </p>
                   </div>
@@ -604,7 +601,7 @@ const TeamAugmentation = () => {
               {processSteps.map((step, index) => (
                 <React.Fragment key={step.step}>
                   <div
-                    className="relative glass-card rounded-2xl p-8 text-center hover-lift border border-white/10 group"
+                    className="relative glass-card rounded-2xl p-8 text-center hover-lift border border-border group"
                     data-aos="zoom-in" // Changed to zoom-in for a more direct reveal
                     data-aos-delay={index * 150}
                     data-aos-duration="1000"
@@ -628,13 +625,13 @@ const TeamAugmentation = () => {
         </section>
 
         {/* Roles We Provide */}
-        <section className="py-24 bg-black-900">
+        <section className="py-24 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16" data-aos="fade-up" data-aos-duration="1000">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6">
                 Roles We <span className="gradient-text">Provide</span>
               </h2>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                 Expert professionals across all major technology domains and specializations.
               </p>
             </div>
@@ -645,7 +642,7 @@ const TeamAugmentation = () => {
                 return (
                   <div
                     key={role.category}
-                    className="glass-card rounded-2xl p-8 hover-lift border border-white/10 group"
+                    className="glass-card rounded-2xl p-8 hover-lift border border-border group"
                     data-aos="card-reveal" // Custom AOS animation
                     data-aos-delay={index * 150}
                     data-aos-duration="1000"
@@ -654,13 +651,13 @@ const TeamAugmentation = () => {
                       <div className="inline-flex p-4 rounded-2xl bg-gradient-primary mr-4 shadow-md group-hover:scale-110 transition-all duration-500">
                         <Icon className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-2xl font-bold text-white group-hover:gradient-text transition-all duration-300">
+                      <h3 className="text-2xl font-bold text-foreground group-hover:gradient-text transition-all duration-300">
                         {role.category}
                       </h3>
                     </div>
                     <div className="grid grid-cols-1 gap-3">
                       {role.positions.map((position, pIndex) => (
-                        <div key={pIndex} className="flex items-center text-white/80">
+                        <div key={pIndex} className="flex items-center text-muted-foreground">
                           <CheckCircle className="w-4 h-4 text-primary mr-3" />
                           <span>{position}</span>
                         </div>
@@ -710,13 +707,13 @@ const TeamAugmentation = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="py-24 bg-black-900">
+        <section className="py-24 bg-muted">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center" data-aos="fade-up" data-aos-duration="1000">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-8">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-8">
                 Need tech experts fast? <span className="gradient-text">Let&apos;s get started.</span>
               </h2>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto mb-12">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
                 Don&apos;t let talent shortages hold back your projects. Get the right people, at the right time,
                 with the right skills to drive your business forward.
               </p>

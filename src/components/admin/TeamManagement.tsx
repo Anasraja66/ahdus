@@ -3,6 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { v4 as uuidv4 } from 'uuid';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
@@ -154,6 +155,31 @@ const TeamManagement = () => {
       active: member?.active ?? true,
       page_type: member?.page_type || 'landing'
     });
+    const [uploading, setUploading] = useState(false);
+
+    // Handle image file upload to Supabase Storage
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      setUploading(true);
+      try {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${uuidv4()}.${fileExt}`;
+        const filePath = `team-members/${fileName}`;
+        let { error: uploadError } = await supabase.storage.from('team-members').upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+        if (uploadError) throw uploadError;
+        // Get public URL
+        const { data } = supabase.storage.from('team-members').getPublicUrl(fileName);
+        setFormData((prev) => ({ ...prev, image: data.publicUrl }));
+      } catch (error) {
+        toast({ title: 'Error', description: 'Image upload failed', variant: 'destructive' });
+      } finally {
+        setUploading(false);
+      }
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -216,12 +242,26 @@ const TeamManagement = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="image">Image URL</Label>
+                <Label htmlFor="image">Image</Label>
                 <Input
                   id="image"
-                  value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  disabled={uploading}
                 />
+                {uploading && <div className="text-xs text-muted-foreground mt-1">Uploading...</div>}
+                {formData.image && (
+                  <div className="mt-2">
+                    <img src={formData.image} alt="Preview" className="w-20 h-20 object-cover rounded-full border" />
+                    <Input
+                      className="mt-2"
+                      value={formData.image}
+                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                      placeholder="Image URL"
+                    />
+                  </div>
+                )}
               </div>
             </div>
 

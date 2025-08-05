@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Trash2, Edit, Plus, Save, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { v4 as uuidv4 } from "uuid"; // Import a UUID generator
 
 interface NewsPost {
   id: string;
@@ -57,8 +58,40 @@ const NewsManagement = () => {
     }
   };
 
-  const handleSave = async (post: Partial<NewsPost>) => {
+  const uploadImage = async (file: File) => {
+    const fileExt = file.name.split('.').pop();
+    const filePath = `${uuidv4()}.${fileExt}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('team-members') // Make sure this is your bucket name
+      .upload(filePath, file);
+
+    if (uploadError) {
+      throw new Error(`Error uploading image: ${uploadError.message}`);
+    }
+
+    const { data } = supabase.storage
+      .from('team-members') // Use the same bucket name
+      .getPublicUrl(filePath);
+
+    if (!data?.publicUrl) {
+      throw new Error('Failed to get public URL for the uploaded image.');
+    }
+
+    return data.publicUrl;
+  };
+
+  const handleSave = async (post: Partial<NewsPost>, imageFile: File | null) => {
     try {
+      let imageUrl = post.featured_image;
+
+      // If a new image file is selected, upload it first
+      if (imageFile) {
+        toast.info('Uploading image...');
+        imageUrl = await uploadImage(imageFile);
+        toast.success('Image uploaded successfully');
+      }
+
       if (editingPost) {
         // Update existing post
         const { error } = await supabase
@@ -71,7 +104,7 @@ const NewsManagement = () => {
             status: post.status,
             published_at: post.status === 'published' ? new Date().toISOString() : null,
             tags: post.tags,
-            featured_image: post.featured_image,
+            featured_image: imageUrl, // Use the new or existing image URL
           })
           .eq('id', editingPost.id);
 
@@ -89,7 +122,7 @@ const NewsManagement = () => {
             status: post.status || 'draft',
             published_at: post.status === 'published' ? new Date().toISOString() : null,
             tags: post.tags,
-            featured_image: post.featured_image,
+            featured_image: imageUrl, // Use the new or existing image URL
           });
 
         if (error) throw error;
@@ -99,9 +132,9 @@ const NewsManagement = () => {
       setEditingPost(null);
       setShowAddForm(false);
       fetchNewsPosts();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving news post:', error);
-      toast.error('Failed to save news post');
+      toast.error(`Failed to save news post: ${error.message}`);
     }
   };
 
@@ -125,7 +158,7 @@ const NewsManagement = () => {
 
   const NewsPostForm = ({ post, onSave, onCancel }: {
     post?: NewsPost | null;
-    onSave: (post: Partial<NewsPost>) => void;
+    onSave: (post: Partial<NewsPost>, imageFile: File | null) => void;
     onCancel: () => void;
   }) => {
     const [formData, setFormData] = useState({
@@ -137,6 +170,8 @@ const NewsManagement = () => {
       tags: post?.tags?.join(', ') || '',
       featured_image: post?.featured_image || '',
     });
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(post?.featured_image || null);
 
     const generateSlug = (title: string) => {
       return title
@@ -145,13 +180,22 @@ const NewsManagement = () => {
         .replace(/(^-|-$)/g, '');
     };
 
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setImageFile(file);
+        setImagePreviewUrl(URL.createObjectURL(file));
+      }
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       onSave({
         ...formData,
         slug: formData.slug || generateSlug(formData.title),
         tags: formData.tags ? formData.tags.split(',').map(tag => tag.trim()) : [],
-      });
+        featured_image: formData.featured_image, // Pass the existing URL
+      }, imageFile); // Pass the new file
     };
 
     return (
@@ -209,13 +253,18 @@ const NewsManagement = () => {
             </div>
 
             <div>
-              <Label htmlFor="featured_image">Featured Image URL</Label>
+              <Label htmlFor="featured_image">Featured Image</Label>
               <Input
                 id="featured_image"
-                value={formData.featured_image}
-                onChange={(e) => setFormData({ ...formData, featured_image: e.target.value })}
-                placeholder="https://example.com/image.jpg"
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
               />
+              {imagePreviewUrl && (
+                <div className="mt-4">
+                  <img src={imagePreviewUrl} alt="Featured" className="max-w-xs h-auto rounded-md" />
+                </div>
+              )}
             </div>
 
             <div>
@@ -311,6 +360,11 @@ const NewsManagement = () => {
                     </div>
                   )}
                 </div>
+                {post.featured_image && (
+                  <div className="ml-4 flex-shrink-0">
+                    <img src={post.featured_image} alt={post.title} className="w-24 h-24 object-cover rounded-md" />
+                  </div>
+                )}
                 <div className="flex gap-2 ml-4">
                   <Button
                     variant="outline"
